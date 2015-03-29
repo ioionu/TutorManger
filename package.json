@@ -1,0 +1,13 @@
+{
+  "name": "TutorManager",
+  "description": "A CRM for tutors",
+  "version": "0.0.1",
+  "engines": {
+    "iojs": "1.6.x"
+  },
+  "dependencies": {
+    "any-db": "^2.1.0",
+    "any-db-postgres": "^2.1.4",
+    "express": "^4.12.3"
+  }
+}
