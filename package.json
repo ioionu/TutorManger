@@ -8,6 +8,7 @@
   "dependencies": {
     "any-db": "^2.1.0",
     "any-db-postgres": "^2.1.4",
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "pg": "^4.3.0"
   }
 }
