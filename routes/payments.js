@@ -1,22 +1,34 @@
 var express = require('express');
-var query = require('../db.js');
 var router = express.Router();
 
-/* GET home page. */
+/* GET payment index. */
 router.get('/', function(req, res, next) {
-  query('select * from payment', function(err, rows, results) {
+  res.query('select * from payment', function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });
     }
     console.log(rows)
-    res.render('payment-index', {title: 'Payments', rows: rows});
+    res.json(rows);
   });
-  //`res.render('index', { title: 'Express' });
 });
 
 router.post('/', function(req, res, next){
 
 });
+
+/* GET payment instance */
+router.get('/:id', function(req, res, next) {
+  res.query('select * from payment where id = ?;', [req.params.id], function(err, rows, results) {
+    if(err) {
+      console.log(err);
+      res.render('error-db', { message: 'DB Error' });
+    }
+    console.log(rows)
+    res.json(rows);
+  });
+});
+
+
 
 module.exports = router;

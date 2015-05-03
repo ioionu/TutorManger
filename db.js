@@ -4,4 +4,11 @@ var query = require('pg-query');
 
 //var conn_string = "postgres://efrvxigvyygabp:s0RSfJQZhjxoDAwm396TWHsZfY@ec2-107-22-161-155.compute-1.amazonaws.com:5432/d6jt69ereqi65r"
 query.connectionParameters = config.db_connection_string;
-module.exports = query;
+
+var db = function(req, res, next) {
+  console.log("yo");
+  res.query = query;
+  next();
+};
+
+module.exports = db;
