@@ -6,7 +6,6 @@ var query = require('pg-query');
 query.connectionParameters = config.db_connection_string;
 
 var db = function(req, res, next) {
-  console.log("yo");
   res.query = query;
   next();
 };

@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Description</td>
+      <td>Amount</td>
+    </tr>
+  </thead>
+  <tbody ng-repeat="payment in payments">
+    <tr>
+      <td>{{payment.id}}</td>
+      <td>{{payment.description}}</td>
+      <td>{{payment.amount}}</td>
+    </tr>
+  </tbody>
+</table>
+<pre>
+  {{payments}}
+</pre>

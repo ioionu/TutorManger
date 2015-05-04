@@ -4,10 +4,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  query('select * from tm', function(err, rows, res) {
+  res.query('select * from tm', function(err, rows, res) {
     console.log(rows)
   });
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', content: 'derp' });
 });
 
 module.exports = router;

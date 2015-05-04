@@ -19,12 +19,13 @@ router.post('/', function(req, res, next){
 
 /* GET payment instance */
 router.get('/:id', function(req, res, next) {
-  res.query('select * from payment where id = ?;', [req.params.id], function(err, rows, results) {
+  console.log(req.params.id);
+  res.query('select * from payment where id = $1::integer;', [req.params.id], function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });
     }
-    console.log(rows)
+    console.log(rows);
     res.json(rows);
   });
 });
