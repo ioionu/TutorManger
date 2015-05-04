@@ -8,7 +8,7 @@
   </thead>
   <tbody ng-repeat="payment in payments">
     <tr>
-      <td>{{payment.id}}</td>
+      <td><a href="/payments/{{payment.id}}">{{payment.id}}</a></td>
       <td>{{payment.description}}</td>
       <td>{{payment.amount}}</td>
     </tr>
