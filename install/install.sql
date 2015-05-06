@@ -4,7 +4,8 @@ CREATE TABLE payments (
   description varchar(256) NOT NULL,
   gateway_id varchar(128),
   amount numeric NOT NULL,
-  userid integer NOT NULL
+  userid integer NOT NULL,
+  lessonid integer NOT NULL
 );
 
 CREATE TABLE users (

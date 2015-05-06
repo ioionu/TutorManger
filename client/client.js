@@ -12,9 +12,14 @@ TMApp.config([
   function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
     $routeProvider.
-      when('/', {
-        templateUrl: 'partials/payment-view.html',
+      when('/payments', {
+        templateUrl: 'partials/payment-index.html',
         controller: 'TMCtrlIndex'
-      });
+      })
+      .when('/payments/:id/view', {
+        templateUrl: 'partials/payment-view.html',
+        controller: 'TMCtrlPaymentView'
+      })
+      ;
   }
 ]);

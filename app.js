@@ -27,7 +27,8 @@ app.use(db);
 
 app.use('/users', users);
 app.use('/', routes);
-app.use('/payments', payments);
+app.use('/payments', routes);
+app.use('/api1', payments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

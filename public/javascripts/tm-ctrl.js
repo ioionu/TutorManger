@@ -16,3 +16,17 @@ TMCtrl.controller(
     }
   ]
 );
+
+//display payment
+TMCtrl.controller(
+  'TMCtrlPaymentView',
+  [
+    '$scope', '$routeParams', '$location', 'TMPayment',
+    function($scope, $routeParams, $location, TMPayment) {
+      var p = TMPayment.get({id: $routeParams.id}, function(){
+        console.log("get got:", p);
+        $scope.payment = p;
+      });
+    }
+  ]
+);
