@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET payment index. */
 router.get('/payments', function(req, res, next) {
-  res.query('select * from payment', function(err, rows, results) {
+  res.query('select * from payments', function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });
@@ -20,7 +20,7 @@ router.post('/', function(req, res, next){
 /* GET payment instance */
 router.get('/payments/:id', function(req, res, next) {
   console.log(req.params.id);
-  res.query('select * from payment where id = $1::integer;', [req.params.id], function(err, rows, results) {
+  res.query('select * from payments where id = $1::integer;', [req.params.id], function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });

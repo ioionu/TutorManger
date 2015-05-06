@@ -1,5 +1,4 @@
 var express = require('express');
-var query = require('../db.js');
 var router = express.Router();
 
 /* GET home page. */
