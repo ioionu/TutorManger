@@ -4,7 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var db = require('./db.js');
+var config = require('./config.js');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,6 +30,39 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(db);
 
+//passport
+var user = {
+  _id: 123,
+  username:"user san",
+  password:"double rot 13 password"
+};
+
+app.use(session({secret: config.session.secret}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  done(null, user);
+});
+
+passport.use('login', new LocalStrategy({
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+    console.log("hello from local");
+    if(password == 'password') {
+      return done(null, user, {message: 'Hello W0rld'});
+    } else {
+      return done(null, false, {message: 'yoo no pass!'});
+    }
+  }
+));
+
+
 app.use('/users', users);
 app.use('/', routes);
 app.use('/payments', routes);
@@ -38,6 +75,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handlers
 
