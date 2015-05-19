@@ -47,5 +47,17 @@ router.post('/users', function(req, res, next) {
   );
 });
 
+/* GET users index. */
+router.get('/users', function(req, res, next) {
+  res.query('select * from users', function(err, rows, results) {
+    if(err) {
+      console.log(err);
+      res.render('error-db', { message: 'DB Error' });
+    }
+    console.log(rows)
+    res.json(rows);
+  });
+});
+
 
 module.exports = router;

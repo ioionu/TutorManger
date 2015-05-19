@@ -51,3 +51,18 @@ TMCtrl.controller(
     }
   ]
 );
+
+//user index
+TMCtrl.controller(
+  'TMCtrlUserIndex',
+  [
+    '$scope', 'TMUser',
+    function($scope, TMUser){
+      //TODO: TMApp
+      $scope.users = TMUser.query();
+      $scope.yo = function(TMUser){
+        console.log(TMUser);
+      }
+    }
+  ]
+);

@@ -15,4 +15,8 @@ router.get(/^\/users\/create/, function(req, res, next) {
   res.render('index', { title: 'User Create', content: 'derp' });
 });
 
+router.get(/^\/users\//, function(req, res, next) {
+  res.render('index', { title: 'User Index', content: 'derp' });
+});
+
 module.exports = router;

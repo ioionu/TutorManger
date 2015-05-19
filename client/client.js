@@ -20,6 +20,10 @@ TMApp.config([
         templateUrl: 'partials/payment-view.html',
         controller: 'TMCtrlPaymentView'
       })
+      .when('/users', {
+        templateUrl: 'partials/user-index.html',
+        controller: 'TMCtrlUserIndex'
+      })
       .when('/users/create', {
         templateUrl: 'partials/user-create.html',
         controller: 'TMCtrlUserCreate'
