@@ -13,7 +13,8 @@ CREATE TABLE payments (
 CREATE TABLE users (
   id serial primary key,
   email varchar(128) NOT NULL UNIQUE,
-  name varchar(128) NOT NULL
+  name varchar(128) NOT NULL,
+  password varchar(128) NOT NULL
 );
 
 CREATE TABLE lessons (
@@ -23,8 +24,8 @@ CREATE TABLE lessons (
   student integer NOT NULL
 );
 
-INSERT INTO users (email, name) VALUES ('student@localhost', 'Test Student');
-INSERT INTO users (email, name) VALUES ('teacher@localhost', 'Test Teacher');
+INSERT INTO users (email, name, password) VALUES ('student@localhost', 'Test Student', 'password');
+INSERT INTO users (email, name, password) VALUES ('teacher@localhost', 'Test Teacher', 'password');
 
 INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999/01/01', 1, 0);
 

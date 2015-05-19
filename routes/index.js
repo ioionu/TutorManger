@@ -11,15 +11,8 @@ router.get(/^\/payments\/.+\/view/, function(req, res, next) {
   res.render('index', { title: 'Payments', content: 'derp' });
 });
 
-router.get('/login', function(req, res){
-  console.log("hello from login");
-  res.render('login', { title: 'login'});
+router.get(/^\/users\/create/, function(req, res, next) {
+  res.render('index', { title: 'User Create', content: 'derp' });
 });
 
-router.post('/login',
-  passport.authenticate('login', {
-    successRedirect: '/payments',
-    failureRedirect: '/'
-  })
-);
 module.exports = router;

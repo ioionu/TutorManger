@@ -30,3 +30,24 @@ TMCtrl.controller(
     }
   ]
 );
+
+//create user
+TMCtrl.controller(
+  'TMCtrlUserCreate',
+  [
+    '$scope', '$location', 'TMUser',
+    function($scope, $location, TMUser){
+      console.log("create user:", $scope);
+      $scope.TMUser = new TMUser();
+      $scope.saveUser = function(){
+        var p = $scope.TMUser.$save(function(){
+          console.log("user saved");
+        });
+        p.then(function(){
+          console.log("and then:", $scope);
+          $location.path('/users/' + $scope.TMUser.id + '/view');
+        });
+      };
+    }
+  ]
+);
