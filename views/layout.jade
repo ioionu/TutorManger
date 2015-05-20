@@ -1,14 +1,21 @@
 doctype html
-html( ng-app="TMApp" lang="en")
+html( ng-app="TMApp" lang="en" class="no-js" )
   head
+    meta(charset="utf-8")
+    meta( name="viewport", content="width=device-width, initial-scale=1.0")
     title= title
+    script(src='/javascripts/modernizer.js')
     script(src='/javascripts/angular.js')
     script(src='/javascripts/angular-route.js')
     script(src='/javascripts/angular-resource.js')
     script(src='/javascripts/client.js')
     script(src='/javascripts/tm-service.js')
     script(src='/javascripts/tm-ctrl.js')
+    link(rel='stylesheet', href='/stylesheets/normalize.css')
+    link(rel='stylesheet', href='/stylesheets/foundation.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     base(href="/#/")
   body
+    include navigation
+
     block content

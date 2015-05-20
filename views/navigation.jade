@@ -1,0 +1,20 @@
+nav( class="top-bar", data-topbar, role="navigation")
+  ul( class="title-area")
+    li( class="name")
+      h1
+        a(href="/") TutorManager
+  section( class="top-bar-section" )
+    ul( class="left" )
+      li
+        a( href="#" )= title
+    ul( class="right" )
+      li( class="has-dropdown" )
+        a( href="/users" ) Users
+        ul( class="dropdown" )
+          li
+            a( href="/users/create" ) Create User
+      li( class="has-dropdown" )
+        a( href="/payments") Payments
+        ul( class="dropdown" )
+          li
+            a( href="/payments/create" ) Create Payment
