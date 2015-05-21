@@ -4,10 +4,16 @@
 
 .call-to-action {
   position:absolute;
-  top: 50px;
+  top: 100px;
+  text-align: center;
+
+  .inner {
+    position: relative;
+    left: 850px;
+  }
 
   p {
-    color: white;
+    color: charcol;
     font-size: 2em;
     font-weight: bold;
   }

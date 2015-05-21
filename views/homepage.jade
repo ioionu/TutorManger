@@ -4,13 +4,6 @@ block append stylesheets
   link(rel='stylesheet', href='/stylesheets/homepage.css')
 
 block content
-  div(class="landing-page-image")
-    img(src="/images/landing-page-image.jpg" with="100%")
-
-  div(class="call-to-action")
-    div(class="content-line")
-      p The easiest way to manage your class!
-    div(class="button-line")
-      a(href="/users/create" title="Get Started" class="button round") Get Started!
+  
   div(class="view-continer")
     div(ng-view, class="view-frame")
