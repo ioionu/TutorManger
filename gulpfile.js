@@ -1,4 +1,5 @@
 gulp = require("gulp");
+sass = require("gulp-sass");
 
 gulp.task('copy', function(){
   gulp.src([
@@ -27,9 +28,14 @@ gulp.task('copy-css', function(){
   )
 });
 
+gulp.task('sass', function(){
+  gulp.src('./client/stylesheets/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/stylesheets/'));
+});
 
 gulp.task('watch', function(){
   gulp.watch(['client/client.js'], ['default']);
 });
 
-gulp.task('default', ['copy', 'copy-css', 'watch']);
+gulp.task('default', ['copy', 'copy-css', 'sass', 'watch']);

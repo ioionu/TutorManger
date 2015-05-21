@@ -1,7 +1,18 @@
 console.log("hello feom controllers");
 var TMCtrl = angular.module('TMCtrl', []);
+
 TMCtrl.controller(
   'TMCtrlIndex',
+  [
+    '$scope',
+    function($scope){
+      console.log("homepage");
+    }
+  ]
+);
+
+TMCtrl.controller(
+  'TMCtrlPaymentIndex',
   [
     '$scope', 'TMPayment',
     function($scope, TMPayment){

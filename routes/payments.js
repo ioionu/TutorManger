@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 /* GET payment index. */
 router.get('/payments', function(req, res, next) {
   res.query('select * from payments', function(err, rows, results) {
