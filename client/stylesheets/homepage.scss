@@ -1,0 +1,20 @@
+.landing-page-image {
+  position:relative;
+}
+
+.call-to-action {
+  position:absolute;
+  top: 100px;
+  text-align: center;
+
+  .inner {
+    position: relative;
+    left: 850px;
+  }
+
+  p {
+    color: charcol;
+    font-size: 2em;
+    font-weight: bold;
+  }
+}
