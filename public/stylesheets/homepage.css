@@ -1,0 +1,14 @@
+.landing-page-image {
+  position: relative; }
+
+.call-to-action {
+  position: absolute;
+  top: 100px;
+  text-align: center; }
+  .call-to-action .inner {
+    position: relative;
+    left: 850px; }
+  .call-to-action p {
+    color: charcol;
+    font-size: 2em;
+    font-weight: bold; }

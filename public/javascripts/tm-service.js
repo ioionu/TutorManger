@@ -10,3 +10,18 @@ TMAppService.factory('TMPayment',
     })
   }
 );
+
+TMAppService.factory('TMUser',
+  function($resource) {
+    return $resource('api1/users/:id', {id: '@_id'}, {
+      query: {
+        method: 'GET',
+        params:{id:'@_id'},
+        isArray:true
+      },
+      save: {
+        method: 'POST',
+      },
+    })
+  }
+);
