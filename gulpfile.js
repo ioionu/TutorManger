@@ -5,6 +5,8 @@ gulp.task('copy', function(){
   gulp.src([
     'bower_components/angular/angular.js',
     'bower_components/modernizr/modernizr.js',
+    'bower_components/jquery/dist/jquery.js',
+    'bower_components/foundation/js/foundation.js',
     'node_modules/angular-resource/angular-resource.js',
     'node_modules/angular-route/angular-route.js',
     'client/client.js',

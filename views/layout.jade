@@ -10,10 +10,12 @@ html( ng-app="TMApp" lang="en" class="no-js" )
       script(src='/javascripts/angular.js')
       script(src='/javascripts/angular-route.js')
       script(src='/javascripts/angular-resource.js')
+      script(src='/javascripts/jquery.js')
+      script(src='/javascripts/foundation.js')
       script(src='/javascripts/client.js')
       script(src='/javascripts/tm-service.js')
       script(src='/javascripts/tm-ctrl.js')
-    
+
     block stylesheets
       link(rel='stylesheet', href='/stylesheets/normalize.css')
       link(rel='stylesheet', href='/stylesheets/foundation.css')
@@ -24,3 +26,5 @@ html( ng-app="TMApp" lang="en" class="no-js" )
     include navigation
 
     block content
+    script
+      $(document).foundation();
