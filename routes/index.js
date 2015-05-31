@@ -11,6 +11,10 @@ router.get(/^\/payments\/.+\/view/, function(req, res, next) {
   res.render('index', { title: 'Payments', content: 'derp' });
 });
 
+router.get(/^\/lessons\/.+\/view/, function(req, res, next) {
+  res.render('index', { title: 'Lessons', content: 'derp' });
+});
+
 router.get(/^\/users\/create/, function(req, res, next) {
   res.render('index', { title: 'User Create', content: 'derp' });
 });

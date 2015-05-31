@@ -77,6 +77,7 @@ passport.use('login', new LocalStrategy({
 app.use('/login', login);
 app.use('/', routes);
 app.use('/payments', routes);
+app.use('/lessons', routes);
 app.use('/users', routes);
 app.use('/api1', payments);
 app.use('/installer', installer);

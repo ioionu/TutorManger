@@ -11,6 +11,8 @@ TMCtrl.controller(
   ]
 );
 
+
+//list payments
 TMCtrl.controller(
   'TMCtrlPaymentIndex',
   [
@@ -41,6 +43,39 @@ TMCtrl.controller(
     }
   ]
 );
+
+/*
+ * Lessons
+ */
+
+//list lessons
+TMCtrl.controller(
+  'TMCtrlLessonsIndex',
+  [
+    '$scope', 'TMLessons',
+    function($scope, TMLessons){
+      $scope.lessons = TMLessons.query();
+      $scope.title = "fuck yeah!!";
+      console.log($scope);
+    }
+  ]
+);
+
+//display lessons
+TMCtrl.controller(
+  'TMCtrlLessonsView',
+  [
+    '$scope', '$routeParams', '$location', 'TMLessons',
+    function($scope, $routeParams, $location, TMLessons) {
+      var p = TMLessons.get({id: $routeParams.id}, function(){
+        console.log("get got:", p);
+        $scope.lesson = p;
+      });
+    }
+  ]
+);
+
+// /end lessons
 
 //create user
 TMCtrl.controller(

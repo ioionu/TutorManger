@@ -1,0 +1,22 @@
+<h1>Lesson {{lesson.id}}</h1>
+<h2>Tutor: {{lesson.tutor_name}}</h2>
+<h2>Student: {{lesson.student_name}}</h2>
+<p>TODO: add lesson desc</p>
+<table class="payment-index">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Amount</td>
+      <td>Status</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="payment in lesson.payments">
+      <td><a href="/payments/{{payment.id}}/view">{{payment.id}}</a></td>
+      <td>{{payment.amount}}</td>
+      <td class="{{payment.status}}">{{payment.status}} <span ng-if="payment.status=='unpaid'"><a href="/payments/{{payment.id}}/view" class="button">Pay</a></span></td>
+    </tr>
+  </tbody>
+</table>
+<pre>{{lesson}}</pre>
+payment view

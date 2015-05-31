@@ -1,0 +1,22 @@
+<h1>Lessons Index</h1>
+<table class="lessons">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Date</td>
+      <td>Tutor</td>
+      <td>Student</td>
+    </tr>
+  </thead>
+  <tbody ng-repeat="lesson in lessons">
+    <tr>
+      <td><a href="/lessons/{{lesson.id}}/view">{{lesson.id}}</a></td>
+      <td>{{lesson.lesson_date}}</td>
+      <td>{{lesson.tutor_name}}</td>
+      <td>{{lesson.student_name}}</td>
+    </tr>
+  </tbody>
+</table>
+<pre>
+  {{lessons}}
+</pre>

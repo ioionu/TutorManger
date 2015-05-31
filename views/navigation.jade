@@ -4,9 +4,6 @@ nav( class="top-bar", data-topbar, role="navigation")
       h1
         a(href="/") TutorManager
   section( class="top-bar-section" )
-    ul( class="left" )
-      li
-        a( href="#" )= title
     ul( class="right" )
       li( class="has-dropdown" )
         a( href="/users" ) Users
@@ -19,6 +16,6 @@ nav( class="top-bar", data-topbar, role="navigation")
           li
             a( href="/payments/create" ) Create Payment
           li
-            a( href="/payments/create" ) Create Payment 2
-          li
-            a( href="http://example.org" class="active" ) Create Payment 2
+            a( href="http://example.org" class="active" target="_blank") external
+      li
+        a( href="/lessons") Lessons

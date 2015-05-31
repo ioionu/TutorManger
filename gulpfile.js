@@ -37,7 +37,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(['client/client.js'], ['default']);
+  gulp.watch(['client/*.js'], ['default']);
   gulp.watch(['client/stylesheets/**/*.scss'], ['sass']);
 });
 
