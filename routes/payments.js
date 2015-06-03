@@ -1,4 +1,6 @@
 var express = require('express');
+var paypal = require('paypal-rest-sdk');
+var config = require('../config');
 var router = express.Router();
 
 
@@ -9,7 +11,7 @@ router.get('/payments', function(req, res, next) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });
     }
-    console.log(rows)
+    console.log(rows);
     res.json(rows);
   });
 });
@@ -30,6 +32,128 @@ router.get('/payments/:id', function(req, res, next) {
     res.json(rows[0]);
   });
 });
+
+router.post('/payments/:id', function(req, res, next) {
+
+
+
+
+});
+
+/**
+ * Transaction
+ */
+
+router.post('/transactions', function(req, res, next){
+
+  //TODO: confirm user has access to this payment
+  var card_data = {
+    type: "visa",
+    number: req.body.number,
+    expire_month: req.body.expire_month,
+    expire_year: req.body.expire_year,
+    cvv2: req.body.cvv2,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name
+  };
+
+
+  var paypal_config = {
+    'mode': config.paypal.configure.mode,
+    'client_id': config.paypal.configure.client_id,
+    'client_secret': config.paypal.configure.client_secret,
+  };
+
+  console.log("cc", card_data);
+
+  // build transaction
+  var create_payment_json = {
+      "intent": "sale",
+      "payer": {
+          "payment_method": "credit_card",
+          "funding_instruments": [{
+              "credit_card": {
+                  "type": "visa",
+                  "number": card_data.number,
+                  "expire_month": card_data.expire_month,
+                  "expire_year": card_data.expire_year,
+                  "cvv2": card_data.cvv2,
+                  "first_name": card_data.first_name,
+                  "last_name": card_data.last_name,
+                  /*
+                  "billing_address": {
+                      "line1": "52 N Main ST",
+                      "city": "Johnstown",
+                      "state": "OH",
+                      "postal_code": "43210",
+                      "country_code": "US"
+                  }
+                  */
+              }
+          }]
+      },
+      "transactions": [{
+          "amount": {
+              "total": "7",
+              "currency": "USD",
+              "details": {
+                  "subtotal": "5",
+                  "tax": "1",
+                  "shipping": "1"
+              }
+          },
+          "description": "This is the payment transaction description."
+      }]
+  };
+
+  console.log("pp", create_payment_json.payer.funding_instruments);
+
+  paypal.configure(paypal_config);
+
+  paypal.payment.create(create_payment_json, function (error, payment) {
+    var message;
+    if (error) {
+      //console.log("no love from pp", error);
+      console.log("no love from pp", JSON.stringify(error));
+      //throw error;
+      message = error.transactions.message;
+      logTransaction(
+        res,
+        req.body.payment_id,
+        req.body.amount,
+        error.httpStatusCode,
+        message
+      );
+
+    } else {
+      console.log("Create Payment Response");
+      console.log(payment);
+
+      message = payment.transactions[0].description;
+      logTransaction(
+        res,
+        req.body.payment_id,
+        req.body.amount,
+        payment.httpStatusCode,
+        message
+      );
+    }
+  });
+
+
+});
+
+function logTransaction(res, payment_id, amount, code, message) {
+  res.query("INSERT INTO transactions (payment_id, amount, code, message) VALUES ($1, $2, $3, $4) RETURNING id",
+  [payment_id, amount, code, message],
+  function(err, rows, results){
+    res.json({code: code, message: message});
+  });
+}
+
+/**
+ * end Transaction
+ */
 
 /*
  * Lessons
@@ -53,7 +177,7 @@ router.get('/lessons', function(req, res, next) {
     console.log(err);
     res.render('error-db', { message: 'DB Error' });
   }
-  console.log(rows)
+  console.log(rows);
   res.json(rows);
   });
 });
@@ -138,7 +262,7 @@ router.get('/users', function(req, res, next) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });
     }
-    console.log(rows)
+    console.log(rows);
     res.json(rows);
   });
 });

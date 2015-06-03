@@ -25,7 +25,7 @@ TMCtrl.controller(
       $scope.derp = "derpX";
       $scope.yo = function(TMPayment){
         console.log(TMPayment);
-      }
+      };
     }
   ]
 );
@@ -34,11 +34,40 @@ TMCtrl.controller(
 TMCtrl.controller(
   'TMCtrlPaymentView',
   [
-    '$scope', '$routeParams', '$location', 'TMPayment',
-    function($scope, $routeParams, $location, TMPayment) {
+    '$scope', '$routeParams', '$location', 'TMPayment', 'TMTransaction',
+    function($scope, $routeParams, $location, TMPayment, TMTransaction) {
       var p = TMPayment.get({id: $routeParams.id}, function(){
-        console.log("get got:", p);
         $scope.payment = p;
+        var form = jQuery("#payment-form");
+        initCCField(form);
+        $scope.makePayment = function(){
+          var transaction = new TMTransaction();
+
+          transaction.number = $scope.cc_number;
+          transaction.expire_month = $scope.cc_expire_month;
+          transaction.expire_year = $scope.cc_expire_year;
+          transaction.cvv2 = $scope.cc_cvv2;
+          transaction.first_name = $scope.cc_first_name;
+          transaction.last_name = $scope.cc_last_name;
+          transaction.payment_id = $routeParams.id;
+          transaction.amount = 5;
+
+          //client side validation of cc number
+          //https://www.npmjs.com/package/card.js
+          var c = card(transaction.number);
+          if(c.isValid()){
+            transaction.type = c.getType();
+
+            console.log("cnumber:", transaction);
+
+            var t = transaction.$save(function(){
+              console.log("payment callback");
+            });
+          } else {
+            console.log("cc not valid");
+          }
+
+        };
       });
     }
   ]

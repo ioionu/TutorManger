@@ -4,6 +4,7 @@ var TMApp = angular.module('TMApp', [
   'ngRoute',
   'TMCtrl',
   'TMAppService',
+  'TMFilters',
 ]);
 
 TMApp.config([

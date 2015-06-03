@@ -6,12 +6,15 @@ gulp.task('copy', function(){
     'bower_components/angular/angular.js',
     'bower_components/modernizr/modernizr.js',
     'bower_components/jquery/dist/jquery.js',
-    'bower_components/foundation/js/foundation.js',
+    'bower_components/jquery/dist/jquery.js',
     'node_modules/angular-resource/angular-resource.js',
     'node_modules/angular-route/angular-route.js',
+    'node_modules/card.js/dist/card.js',
     'client/client.js',
+    'client/lib.js',
     'client/tm-ctrl.js',
     'client/tm-service.js',
+    'client/tm-filters.js',
   ])
   .pipe(
     gulp.dest('public/javascripts/')
@@ -27,7 +30,7 @@ gulp.task('copy-css', function(){
   ])
   .pipe(
     gulp.dest('public/stylesheets/')
-  )
+  );
 });
 
 gulp.task('sass', function(){
@@ -37,7 +40,7 @@ gulp.task('sass', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(['client/*.js'], ['default']);
+  gulp.watch(['client/**/*.js'], ['default']);
   gulp.watch(['client/stylesheets/**/*.scss'], ['sass']);
 });
 

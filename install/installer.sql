@@ -25,6 +25,14 @@ CREATE TABLE lessons (
   student integer NOT NULL
 );
 
+CREATE TABLE transactions (
+  id serial primary key,
+  payment_id integer NOT NULL,
+  amount varchar(128) NOT NULL,
+  code varchar(8) NOT NULL,
+  message varchar(256) NOT NULL
+);
+
 INSERT INTO users (email, name, password) VALUES ('student@localhost', 'Test Student', 'password');
 INSERT INTO users (email, name, password) VALUES ('teacher@localhost', 'Test Teacher', 'password');
 

@@ -13,3 +13,32 @@ a {
      white-space: nowrap;
   }
 }
+
+.transaction
+{
+  width: 50%;
+  margin: auto;
+
+  .date-container
+  {
+    width: 50%;
+
+    .field
+    {
+      width: 45%;
+      float: left;
+      margin-right: 1%;
+    }
+  }
+
+  .cvv-container
+  {
+    width: 25%;
+    float: right;
+  }
+
+  .submit-button
+  {
+    clear: both;
+  }
+}

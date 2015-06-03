@@ -7,3 +7,23 @@ a {
 
 .payment-index td {
   white-space: nowrap; }
+
+.transaction {
+  width: 50%;
+  margin: auto; }
+  .transaction
+.date-container {
+    width: 50%; }
+    .transaction
+.date-container
+.field {
+      width: 45%;
+      float: left;
+      margin-right: 1%; }
+  .transaction
+.cvv-container {
+    width: 25%;
+    float: right; }
+  .transaction
+.submit-button {
+    clear: both; }
