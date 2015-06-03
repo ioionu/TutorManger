@@ -116,7 +116,7 @@ router.post('/transactions', function(req, res, next){
       //console.log("no love from pp", error);
       console.log("no love from pp", JSON.stringify(error));
       //throw error;
-      message = error.transactions.message;
+      message = error.response.message;
       logTransaction(
         res,
         req.body.payment_id,

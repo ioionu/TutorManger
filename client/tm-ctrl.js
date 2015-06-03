@@ -38,8 +38,6 @@ TMCtrl.controller(
     function($scope, $routeParams, $location, TMPayment, TMTransaction) {
       var p = TMPayment.get({id: $routeParams.id}, function(){
         $scope.payment = p;
-        var form = jQuery("#payment-form");
-        initCCField(form);
         $scope.makePayment = function(){
           var transaction = new TMTransaction();
 
