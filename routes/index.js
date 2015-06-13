@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('homepage', { title: 'Payments', content: '' });
+  res.render('homepage', { title: 'Payments', content: '123', user: req.user });
 });
 
 router.get(/^\/payments\/.+\/view/, function(req, res, next) {

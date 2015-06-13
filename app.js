@@ -39,19 +39,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(db);
 
-//passport
-var user = {
-  _id: 123,
-  username:"user san",
-  password:"double rot 13 password"
-};
-
 app.use(session({secret: config.session.secret}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-  done(null, user._id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
@@ -63,13 +56,17 @@ passport.use('login', new LocalStrategy({
   },
   function(req, username, password, done) {
     req.res.query('select * from users where email = $1;', [username], function(err, rows, results){
-      console.log('results', rows);
+      user = rows[0];
+      console.log('results', user);
       if (err) {
+        console.log("error:", err);
         done(null, false, {message: 'User not found'});
       }
-      if(rows[0].password != password) {
-        return done(null, user, {message: 'Hello W0rld'});
+      if(user.password === password) {
+        console.log("hello:", password, user.password);
+        return done(null, user);
       } else {
+        console.log("fuck off:", password, user.password);
         return done(null, false, {message: 'yoo no pass!'});
       }
     });

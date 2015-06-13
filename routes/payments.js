@@ -6,7 +6,19 @@ var router = express.Router();
 
 /* GET payment index. */
 router.get('/', function(req, res, next) {
-  res.query('select * from payments', function(err, rows, results) {
+  if(!req.isAuthenticated()) {
+    res.json({status: 'error', redirect: '/login'});
+  }
+
+  res.query('select ' +
+    'payments.id, payments.description, payments.amount, payments.status ' +
+    'from payments ' +
+    'join lessons ' +
+    'on payments.lessonid = lessons.id ' +
+    'where lessons.student = $1::integer ' +
+    'or lessons.tutor = $1::integer;',
+    [req.user.id],
+    function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });

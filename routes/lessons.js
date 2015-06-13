@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var config = require('../config');
 var router = express.Router();
 
@@ -8,7 +9,12 @@ var router = express.Router();
 
  /* GET Lessons index. */
 router.get('/', function(req, res, next) {
-  console.log("lessons index");
+  //res.ensureAuthenticated();
+  console.log("lessons index", req.user);
+  if(!req.isAuthenticated()) {
+    res.json({status: 'error', redirect: '/login'});
+  }
+
   res.query(
     'select ' +
       'lessons.id,' +
@@ -19,7 +25,10 @@ router.get('/', function(req, res, next) {
       'join users as tutor ' +
       'on lessons.tutor = tutor.id ' +
       'join users as student ' +
-      'on lessons.student = student.id;',
+      'on lessons.student = student.id ' +
+      'WHERE lessons.student = $1::integer OR ' +
+      'lessons.tutor = $1::integer;',
+      [req.user.id],
   function(err, rows, results) {
   if(err) {
     console.log(err);

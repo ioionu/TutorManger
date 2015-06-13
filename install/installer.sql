@@ -33,12 +33,16 @@ CREATE TABLE transactions (
 );
 
 INSERT INTO users (email, name, password) VALUES ('student@localhost', 'Test Student', 'password');
+INSERT INTO users (email, name, password) VALUES ('student2@localhost', 'Test2 Student2', 'password');
 INSERT INTO users (email, name, password) VALUES ('teacher@localhost', 'Test Teacher', 'password');
 
-INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999/01/01', 2, 1);
-INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999/02/01', 2, 1);
+INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999-01-01', 3, 1);
+INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999-02-01', 3, 1);
+INSERT INTO lessons (lesson_date, tutor, student) VALUES ('2015-02-01', 3, 2);
 
 INSERT INTO payments (description, amount, userid, lessonid, status)
   VALUES ('test payment', 20, 1, 1, 'paid');
 INSERT INTO payments (description, amount, userid, lessonid, status)
   VALUES ('test payment 2', 10, 1, 2, 'unpaid');
+INSERT INTO payments (description, amount, userid, lessonid, status)
+  VALUES ('test payment 3', 30, 2, 3, 'unpaid');
