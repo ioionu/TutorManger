@@ -1,35 +1,46 @@
-<h1>Invoice {{payment.id}}</h1>
-<h2>Our Ref: {{payment.id}}</h2>
-<h2>Amount: ${{payment.amount}}</h2>
-<p>{{payment.description}}</p>
-<div class="transaction">
-  <form id="payment-form" ng-submit="makePayment()">
+<div class="payment">
+  <div ng-if="payment.paid" class="status paid">
+    <h2>PAID</h2>
+  </div>
+  <div ng-if="!payment.paid" class="status unpaid">
+    <h2>UNPAID</h2>
+  </div>
 
-    <label>CC Number (4446283280247004)<input type="text" name="number" id="number" ng-model="cc_number"/></label>
-    <label>First Name<input type="text" name="first_name" id="first_name" ng-model="cc_first_name"/></label>
-    <label>Last Name<input type="text" name="last_name" id="last_name" ng-model="cc_last_name"/></label>
+  <h1>Invoice {{payment.id}}</h1>
+  <h2>Our Ref: {{payment.id}}</h2>
+  <h2>Amount: ${{payment.amount}}</h2>
+  <p><strong>Description:</strong>: {{payment.description}}</p>
+  <p><strong>Status:</strong>: {{payment.status}}</p>
 
-    <div class="date-container">
-      <div class="field">
-        <label for="cc_expire_month">Expire Month:</label>
-        <select id="cc_expire_month" name="cc_expire_month" ng-model="cc_expire_month">
-          <option value="{{month}}" ng-repeat="month in [1,2,3,4,5,6,7,8,9,10,11,12]">{{month}}</option>
-        </select>
+  <div class="transaction" ng-if="!payment.paid">
+    <div class="ssl-secure">SSL Secure <img src="/images/system-lock-screen.png" alt="lock"/></div>
+
+    <form class="payment-form" stripe:form="makePayment" ng-submit="checkCard()">
+
+      <label>CC Number (4242424242424242)
+        <input type="text" name="number" id="number" ng-model="cc_number" data-stripe="number" size="20" value="4242424242424242"/></label>
+
+      <div class="date-container">
+
+        <div class="field">
+          <label for="cc_expire_month">Expire Month:</label>
+          <select id="cc_expire_month" name="cc_expire_month" ng-model="cc_expire_month" data-stripe="exp-month">
+            <option value="{{month}}" ng-repeat="month in [1,2,3,4,5,6,7,8,9,10,11,12]">{{month}}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cc_expire_year">Expire Year:</label>
+          <select id="cc_expire_year" name="cc_expire_year" ng-model="cc_expire_year" data-stripe="exp-year">
+            <option ng-repeat="year in [] | TMCCYearRange" value="{{year}}">{{year}}</option>
+          </select>
+        </div>
       </div>
-      <div class="field">
-        <label for="cc_expire_year">Expire Year:</label>
-        <select id="cc_expire_year" name="cc_expire_year" ng-model="cc_expire_year">
-          <option ng-repeat="year in [] | TMCCYearRange" value="{{year}}">{{year}}</option>
-        </select>
+      <div class="cvv-container">
+        <label>CVV:<input type="text" name="cvv2" id="cvv2" ng-model="cc_cvv2" data-stripe="cvc" size="4" value="123"/></label>
       </div>
-    </div>
-    <div class="cvv-container">
-      <label>CVV:<input type="text" name="cvv2" id="cvv2" ng-model="cc_cvv2"/></label>
-    </div>
-    <div class="submit-button">
-      <input type="submit" name="submit" value="Make Payment" class="button"/>
-    </div>
-  </form>
+      <div class="submit-button">
+        <input type="submit" name="submit" value="Make Payment" class="button"/>
+      </div>
+    </form>
+  </div>
 </div>
-<pre>{{payment}}</pre>
-payment view

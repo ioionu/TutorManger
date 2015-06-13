@@ -21,8 +21,6 @@ TMCtrl.controller(
       //TODO: TMApp
       console.log("dis bbe da index");
       $scope.payments = TMPayment.query();
-      console.log($scope.payments);
-      $scope.derp = "derpX";
       $scope.yo = function(TMPayment){
         console.log(TMPayment);
       };
@@ -38,33 +36,45 @@ TMCtrl.controller(
     function($scope, $routeParams, $location, TMPayment, TMTransaction) {
       var p = TMPayment.get({id: $routeParams.id}, function(){
         $scope.payment = p;
-        $scope.makePayment = function(){
-          var transaction = new TMTransaction();
-
-          transaction.number = $scope.cc_number;
-          transaction.expire_month = $scope.cc_expire_month;
-          transaction.expire_year = $scope.cc_expire_year;
-          transaction.cvv2 = $scope.cc_cvv2;
-          transaction.first_name = $scope.cc_first_name;
-          transaction.last_name = $scope.cc_last_name;
-          transaction.payment_id = $routeParams.id;
-          transaction.amount = 5;
-
-          //client side validation of cc number
-          //https://www.npmjs.com/package/card.js
-          var c = card(transaction.number);
-          if(c.isValid()){
-            transaction.type = c.getType();
-
-            console.log("cnumber:", transaction);
-
-            var t = transaction.$save(function(){
-              console.log("payment callback");
-            });
+        $scope.checkCard = function(){
+          console.log("checkCard");
+          jQuery('.transaction .payment-form input, .transaction .payment-form select').attr('disabled','true');
+        };
+        $scope.makePayment = function(status, response) {
+          jQuery('.transaction .payment-form input, .transaction .payment-form select').attr('disabled','true');
+          console.log("da faq id this:", (status===200), status, response);
+          if(status===200) {
+            //disable button to prevent resubmit
+            var transaction = new TMTransaction();
+            transaction.payment_id = $routeParams.id;
+            transaction.amount = $scope.payment.amount;
+            transaction.token = response.id;
+            transaction.$save()
+            .then(
+              function(transaction){
+                console.log("payment callback", transaction);
+                //alert("woot!");
+                //$location.path('/payments/' + $routeParams.id + '/view');
+                if(transaction.status==="succeeded") {
+                  //$location.search();
+                  $scope.payment = TMPayment.get({id: $routeParams.id});
+                } else {
+                  alert("booo");
+                }
+              }
+            );
           } else {
-            console.log("cc not valid");
+            //jQuery('.payment-form input, #payment-form select').attr('disabled',null);
+            var err_message = "There was an error processing transaction: " + response.error.message;
+            jQuery(jQuery(".transaction")[0]).prepend(
+              "<div class='alert-box alert'>" + err_message + "<a href='#' class='close'>&times;</a></div>"
+            );
+            jQuery(document).foundation();
+            jQuery('.transaction .payment-form input, .transaction .payment-form select').attr('disabled',null);
+            console.log(err_message, status, response);
           }
 
+          //$http.post('/save_customer', { token: response.id });
         };
       });
     }

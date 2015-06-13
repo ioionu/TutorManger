@@ -10,13 +10,16 @@ html( ng-app="TMApp" lang="en" class="no-js" )
       script(src='/javascripts/angular.js')
       script(src='/javascripts/angular-route.js')
       script(src='/javascripts/angular-resource.js')
+      script(src='/javascripts/stripe-angular.js')
       script(src='/javascripts/jquery.js')
       script(src='/javascripts/foundation.js')
+      script(src='/javascripts/foundation.alert.js')
       script(src='/javascripts/card.js')
       script(src='/javascripts/client.js')
       script(src='/javascripts/tm-service.js')
       script(src='/javascripts/tm-ctrl.js')
       script(src='/javascripts/tm-filters.js')
+      script(src='https://js.stripe.com/v2/')
 
     block stylesheets
       link(rel='stylesheet', href='/stylesheets/normalize.css')
@@ -28,5 +31,5 @@ html( ng-app="TMApp" lang="en" class="no-js" )
     include navigation
 
     block content
-    script
-      $(document).foundation();
+    script.
+      jQuery(document).foundation();

@@ -8,10 +8,20 @@ config.SALT_WORK_FACTOR = 10;
 
 config.paypal = {
   configure: {
-    'mode': 'sandbox', //sandbox or live
+    'mode': process.env.cc_mode, //sandbox or live or offline
     'client_id': process.env.cc_client_id,
     'client_secret': process.env.cc_client_secret,
   }
 };
+
+config.stripe = {
+  configure: {
+    'mode': process.env.stripe_mode, //sandbox or live or offline
+    'public_key': process.env.stripe_public_key,
+    'secret_key': process.env.stripe_secret,
+  }
+};
+
+
 
 module.exports = config;

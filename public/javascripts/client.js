@@ -5,6 +5,7 @@ var TMApp = angular.module('TMApp', [
   'TMCtrl',
   'TMAppService',
   'TMFilters',
+  'stripe'
 ]);
 
 TMApp.config([
@@ -12,6 +13,7 @@ TMApp.config([
   '$locationProvider',
   function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
+    Stripe.setPublishableKey("pk_test_SmtJiXCEwaof3aL3xudljbMq");
     $routeProvider.
       when('/', {
         templateUrl: 'partials/index.html',
@@ -51,6 +53,7 @@ TMApp.config([
       ;
   }
 ]);
+
 
 TMApp.run(['$location', '$rootScope', function($location, $rootScope) {
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

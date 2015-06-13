@@ -5,12 +5,28 @@ body {
 a {
   color: #00B7FF; }
 
+.payment .status {
+  float: right; }
+
+.payment .paid h2 {
+  color: green; }
+
+.payment .unpaid h2 {
+  color: red; }
+
 .payment-index td {
   white-space: nowrap; }
 
 .transaction {
-  width: 50%;
-  margin: auto; }
+  width: 75%;
+  margin: auto;
+  padding: 1em;
+  border: 1px inset #666;
+  background-color: #ccc; }
+  .transaction
+.ssl-secure {
+    text-align: right;
+    font-weight: bold; }
   .transaction
 .date-container {
     width: 50%; }

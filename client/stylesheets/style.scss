@@ -7,6 +7,17 @@ a {
   color: #00B7FF;
 }
 
+.payment {
+  .status {
+    float: right;
+  }
+  .paid h2 {
+    color: green;
+  }
+  .unpaid h2 {
+    color: red;
+  }
+}
 
 .payment-index {
   td {
@@ -16,9 +27,17 @@ a {
 
 .transaction
 {
-  width: 50%;
+  width: 75%;
   margin: auto;
+  padding: 1em;
+  border: 1px inset #666;
+  background-color: #ccc;
 
+  .ssl-secure
+  {
+    text-align: right;
+    font-weight: bold;
+  }
   .date-container
   {
     width: 50%;

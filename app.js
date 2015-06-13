@@ -19,6 +19,10 @@ var routes = require('./routes/index');
 var login = require('./routes/login');
 var payments = require('./routes/payments');
 var installer = require('./routes/installer');
+var transactions = require('./routes/transactions');
+var lessons = require('./routes/lessons');
+var users = require('./routes/users');
+var testthing = require('./routes/testthing');
 
 var app = express();
 
@@ -73,12 +77,23 @@ passport.use('login', new LocalStrategy({
   }
 ));
 
+app.use(function(req, res, next) {
+  if(!req.secure && config.force_https) {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  next();
+});
 
 app.use('/login', login);
 app.use('/', routes);
 app.use('/payments', routes);
 app.use('/lessons', routes);
 app.use('/users', routes);
+app.use('/api1/testthing', testthing);
+app.use('/api1/transactions', transactions);
+app.use('/api1/payments', payments);
+app.use('/api1/users', users);
+app.use('/api1/lessons', lessons);
 app.use('/api1', payments);
 app.use('/installer', installer);
 
