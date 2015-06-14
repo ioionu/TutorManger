@@ -75,8 +75,8 @@ passport.use('login', new LocalStrategy({
 ));
 
 app.use(function(req, res, next) {
-  console.log("is secure", req.protocol, " force_https:", config.force_https);
-  if(req.protocol!='https' && config.force_https) {
+  console.log("is secure", req.headers['x-forwarded-proto'], " force_https:", config.force_https);
+  if(req.headers['x-forwarded-proto']!='https' && config.force_https) {
     var redirect = ['https://', req.get('Host'), req.url].join('');
     console.log("redirect to:", redirect);
     return res.redirect(redirect);
