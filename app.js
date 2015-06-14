@@ -77,7 +77,9 @@ passport.use('login', new LocalStrategy({
 app.use(function(req, res, next) {
   console.log("is secure", req.secure, " force_https:", config.force_https);
   if(!req.secure && config.force_https) {
-    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    var redirect = ['https://', req.get('Host'), req.url].join('');
+    console.log("redirect to:", redirect);
+    return res.redirect(redirect);
   }
   next();
 });
