@@ -9,7 +9,7 @@ nav( class="top-bar", data-topbar, role="navigation")
         if user != undefined
           a( href='/lessons') #{user.name}
         else
-          a( href='/login' class='button') Login
+          a( href='/login' class='button' target="_self") Login
     ul( class="right" )
       li()
         a( href="/payments") Payments
