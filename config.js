@@ -22,6 +22,6 @@ config.stripe = {
   }
 };
 
-
+config.force_https = process.env.force_https;
 
 module.exports = config;
