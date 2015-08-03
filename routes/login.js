@@ -9,10 +9,10 @@ router.get('/', function(req, res){
 });
 
 router.post('/',
-  passport.authenticate('login', {
-    successRedirect: '/lessons',
-    failureRedirect: '/'
-  })
+  passport.authenticate('login'),
+  function(req, res){
+    res.json({"qew":123});
+  }
 );
 
 module.exports = router;

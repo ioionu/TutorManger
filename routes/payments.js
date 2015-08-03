@@ -1,5 +1,6 @@
 var express = require('express');
 var paypal = require('paypal-rest-sdk');
+var passport = require('passport');
 var config = require('../config');
 var router = express.Router();
 
@@ -7,7 +8,7 @@ var router = express.Router();
 /* GET payment index. */
 router.get('/', function(req, res, next) {
   if(!req.isAuthenticated()) {
-    res.json({status: 'error', redirect: '/login'});
+    res.send(401);
   }
 
   res.query('select ' +

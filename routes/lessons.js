@@ -12,31 +12,33 @@ router.get('/', function(req, res, next) {
   //res.ensureAuthenticated();
   console.log("lessons index", req.user);
   if(!req.isAuthenticated()) {
-    res.json({status: 'error', redirect: '/login'});
-  }
+    res.send(401);
+  } else {
 
-  res.query(
-    'select ' +
-      'lessons.id,' +
-      'lessons.lesson_date,' +
-      'tutor.name as tutor_name, ' +
-      'student.name as student_name ' +
-      'from lessons ' +
-      'join users as tutor ' +
-      'on lessons.tutor = tutor.id ' +
-      'join users as student ' +
-      'on lessons.student = student.id ' +
-      'WHERE lessons.student = $1::integer OR ' +
-      'lessons.tutor = $1::integer;',
+    res.query(
+      'select ' +
+        'lessons.id,' +
+        'lessons.lesson_date,' +
+        'tutor.name as tutor_name, ' +
+        'student.name as student_name ' +
+        'from lessons ' +
+        'join users as tutor ' +
+        'on lessons.tutor = tutor.id ' +
+        'join users as student ' +
+        'on lessons.student = student.id ' +
+        'WHERE lessons.student = $1::integer OR ' +
+        'lessons.tutor = $1::integer;',
       [req.user.id],
-  function(err, rows, results) {
-  if(err) {
-    console.log(err);
-    res.render('error-db', { message: 'DB Error' });
+      function(err, rows, results) {
+        if(err) {
+          console.log(err);
+          res.render('error-db', { message: 'DB Error' });
+        }
+        console.log(rows);
+        res.json(rows);
+      }
+    );
   }
-  console.log(rows);
-  res.json(rows);
-  });
 });
 
 router.post('/', function(req, res, next){

@@ -23,4 +23,14 @@ router.get(/^\/users\//, function(req, res, next) {
   res.render('index', { title: 'User Index', content: '' });
 });
 
+router.get(/^\/login/, function(req, res, next) {
+  res.render('index', { title: 'User Login', content: '' });
+});
+
+router.get(/^\/logout/, function(req, res, next){
+  res.render('index', { title: 'User Logout', content: '' });
+//  req.logout();
+//  res.redirect('/');
+});
+
 module.exports = router;

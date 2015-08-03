@@ -55,6 +55,7 @@ passport.use('login', new LocalStrategy({
     passReqToCallback : true
   },
   function(req, username, password, done) {
+    console.log("local derp");
     req.res.query('select * from users where email = $1;', [username], function(err, rows, results){
       user = rows[0];
       console.log('results', user);
@@ -83,7 +84,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/login', login);
+app.use('/login', routes);
 app.use('/', routes);
 app.use('/payments', routes);
 app.use('/lessons', routes);
@@ -92,6 +93,7 @@ app.use('/api1/testthing', testthing);
 app.use('/api1/transactions', transactions);
 app.use('/api1/payments', payments);
 app.use('/api1/users', users);
+app.use('/api1/login', login);
 app.use('/api1/lessons', lessons);
 app.use('/api1', payments);
 app.use('/installer', installer);

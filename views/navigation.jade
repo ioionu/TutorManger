@@ -5,10 +5,13 @@ nav( class="top-bar", data-topbar, role="navigation")
         a(href="/") TutorManager
   section( class="top-bar-section" )
     ul
-      li
-        if user != undefined
+      if user != undefined
+        li
           a( href='/lessons') #{user.name}
-        else
+        li
+          a( href='/logout') logout
+      else
+        li
           a( href='/login' class='button' target="_self") Login
     ul( class="right" )
       li()

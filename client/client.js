@@ -9,11 +9,13 @@ var TMApp = angular.module('TMApp', [
 ]);
 
 TMApp.config([
+  '$httpProvider',
   '$routeProvider',
   '$locationProvider',
-  function($routeProvider, $locationProvider){
+  function($httpProvider, $routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
     Stripe.setPublishableKey("pk_test_SmtJiXCEwaof3aL3xudljbMq");
+    $httpProvider.interceptors.push('TMAppInterceptor');
     $routeProvider.
       when('/', {
         templateUrl: 'partials/index.html',
@@ -48,6 +50,16 @@ TMApp.config([
       .when('/users/create', {
         templateUrl: 'partials/user-create.html',
         controller: 'TMCtrlUserCreate',
+        title: 'Create User'
+      })
+      .when('/login', {
+        templateUrl: 'partials/user-login.html',
+        controller: 'TMCtrlUser',
+        title: 'Login User'
+      })
+      .when('/logout', {
+        //templateUrl: 'partials/user-create.html',
+        controller: 'TMCtrlUserLogout',
         title: 'Create User'
       })
       ;

@@ -149,3 +149,48 @@ TMCtrl.controller(
     }
   ]
 );
+
+// logout user
+TMCtrl.controller(
+  'TMCtrlUserLogout',
+  [
+    '$scope', 'TMUser',
+    function($scope, TMUser){
+      //TODO: TMApp
+      $scope.users = TMUser.query();
+    }
+  ]
+);
+
+
+TMCtrl.controller(
+  'TMCtrlUser',
+  ['$scope', '$location', '$window', 'TMUserService', 'TMAuthenticationService',
+  function($scope, $location, $window, TMUserService, TMAuthenticationService) {
+
+    //Admin User Controller (login, logout)
+    $scope.logIn = function logIn(username, password) {
+      console.log("hello login");
+      if (username !== undefined && password !== undefined) {
+
+        TMUserService.logIn(username, password)
+        .success(function(data) {
+          TMAuthenticationService.isLogged = true;
+          $window.sessionStorage.token = data.token;
+          $location.path("/admin");
+        }).error(function(status, data) {
+          console.log(status);
+          console.log(data);
+        });
+      }
+    };
+
+    $scope.logout = function logout() {
+      if (TMAuthenticationService.isLogged) {
+        TMAuthenticationService.isLogged = false;
+        delete $window.sessionStorage.token;
+        $location.path("/");
+      }
+    };
+  }
+]);
