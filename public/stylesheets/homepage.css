@@ -1,14 +1,21 @@
 .landing-page-image {
-  position: relative; }
+  position: relative;
+  background-image: url("/images/landing-page-image.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: none;
+  height: 90vh; }
 
-.call-to-action {
-  position: absolute;
-  top: 100px;
-  text-align: center; }
-  .call-to-action .inner {
-    position: relative;
-    left: 850px; }
-  .call-to-action p {
-    color: charcol;
-    font-size: 2em;
-    font-weight: bold; }
+.call-to-action .inner {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 1em; }
+  @media only screen and (min-width: 64.063em) {
+    .call-to-action .inner {
+      border-bottom-left-radius: 1em; } }
+
+.call-to-action p {
+  color: charcol;
+  font-size: 2em;
+  font-weight: bold; }
