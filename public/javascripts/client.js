@@ -58,17 +58,21 @@ TMApp.config([
         title: 'Login User'
       })
       .when('/logout', {
-        //templateUrl: 'partials/user-create.html',
-        controller: 'TMCtrlUserLogout',
-        title: 'Create User'
+        templateUrl: 'partials/user-logout.html',
+        controller: 'TMCtrlUser',
+        title: 'User Logout'
       })
       ;
   }
 ]);
 
 
-TMApp.run(['$location', '$rootScope', function($location, $rootScope) {
+TMApp.run(['$location', '$rootScope', 'TMUserService', function($location, $rootScope, TMUserService) {
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+
     $rootScope.title = current.$$route.title;
+    $rootScope.isLogged = TMUserService.isLogged;
+    console.log("boom", $rootScope.isLogged);
+
   });
 }]);

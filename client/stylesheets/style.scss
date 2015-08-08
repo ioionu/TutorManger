@@ -1,6 +1,22 @@
+/* mix ins */
+@mixin base-document-width
+{
+  @media only screen and (min-width: 64.063em)
+  {
+    max-width: 1024px;
+    margin: auto;
+
+  } /* min-width 1025px, large screens */
+}
+
 body {
   //padding: 0 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.wrapper
+{
+  @include base-document-width;
 }
 
 a {
@@ -59,5 +75,15 @@ a {
   .submit-button
   {
     clear: both;
+  }
+}
+
+.top-bar-wrapper
+{
+  background-color: #444;
+
+  .top-bar
+  {
+    @include base-document-width;
   }
 }

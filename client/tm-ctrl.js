@@ -145,7 +145,7 @@ TMCtrl.controller(
       $scope.users = TMUser.query();
       $scope.yo = function(TMUser){
         console.log(TMUser);
-      }
+      };
     }
   ]
 );
@@ -169,15 +169,16 @@ TMCtrl.controller(
   function($scope, $location, $window, TMUserService, TMAuthenticationService) {
 
     //Admin User Controller (login, logout)
-    $scope.logIn = function logIn(username, password) {
+    $scope.logIn = function(username, password) {
       console.log("hello login");
       if (username !== undefined && password !== undefined) {
 
         TMUserService.logIn(username, password)
         .success(function(data) {
-          TMAuthenticationService.isLogged = true;
+          TMUserService.isLogged = true;
+          TMUserService.user = data;
           $window.sessionStorage.token = data.token;
-          $location.path("/admin");
+          $location.path("/");
         }).error(function(status, data) {
           console.log(status);
           console.log(data);
@@ -185,12 +186,33 @@ TMCtrl.controller(
       }
     };
 
-    $scope.logout = function logout() {
-      if (TMAuthenticationService.isLogged) {
-        TMAuthenticationService.isLogged = false;
+    $scope.logout = function() {
+      console.log("logging out");
+      if (TMUserService.isLogged) {
+        TMUserService.isLogged = false;
         delete $window.sessionStorage.token;
         $location.path("/");
       }
     };
+  }
+]);
+
+
+TMCtrl.controller(
+  'TMCtrlNav',
+  ['$scope', '$rootScope', '$location', 'TMUserService',
+  function($scope, $rootScope, $location, TMUserService) {
+    $rootScope.isActive = function (viewLocation) {
+      return viewLocation === $location.path();
+    };
+    console.log("user:", $scope.user);
+    var loggedInCheck = function(){
+      return true;
+    };
+    $scope.getUserName = function(){
+      return TMUserService.user.name;
+    };
+
+    //$scope.isLoggedIn ? typeof($scope.user;
   }
 ]);

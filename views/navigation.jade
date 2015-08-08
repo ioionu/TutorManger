@@ -1,20 +1,19 @@
-nav( class="top-bar", data-topbar, role="navigation")
-  ul( class="title-area")
-    li( class="name")
-      h1
-        a(href="/") TutorManager
-  section( class="top-bar-section" )
-    ul
-      if user != undefined
+div(class="top-bar-wrapper")
+  nav( class="top-bar", data-topbar, role="navigation" ng-controller="TMCtrlNav")
+    ul( class="title-area")
+      li( class="name")
+        h1
+          a(href="/") TutorManager
+    section( class="top-bar-section" )
+      ul(ng-show="isLogged")
         li
-          a( href='/lessons') #{user.name}
+          a( href='/lessons' ng-bind="getUserName()") ...
         li
           a( href='/logout') logout
-      else
+      ul(ng-hide="isLogged")
         li
-          a( href='/login' class='button' target="_self") Login
-    if user != undefined
-      ul( class="right" )
+          a( href='/login' class='button') Login
+      ul( class="right" ng-show="isLogged")
         li()
           a( href="/payments") Payments
         li

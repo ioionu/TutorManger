@@ -11,7 +11,7 @@ TMAppService.factory('TMPayment',
         method: 'POST',
         params: {id:'@id'}
       }
-    })
+    });
   }
 );
 
@@ -33,7 +33,8 @@ TMAppService.factory('TMUser',
 TMAppService.factory('TMAuthenticationService',
   function() {
     var auth = {
-      isLogged: false
+      isLogged: false,
+      user: false
     };
 
     return auth;
@@ -48,7 +49,9 @@ TMAppService.factory('TMUserService',
       },
       logOut: function() {
         console.log("hello logout");
-      }
+      },
+      isLogged: false,
+      user: false
     };
   }
 );
@@ -85,16 +88,7 @@ TMAppService.factory('TMTransaction',
   }
 );
 
-TMAppService.factory(
-  'TMAuthenticationService',
-  function() {
-    var auth = {
-      isLogged: false
-    };
-    return auth;
-  }
-);
-
+//if request is rejected 403 redirect to login
 TMAppService.factory(
   'TMAppInterceptor',
   function($q, $location){

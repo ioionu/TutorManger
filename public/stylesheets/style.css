@@ -1,5 +1,13 @@
+/* mix ins */
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+.wrapper {
+  /* min-width 1025px, large screens */ }
+  @media only screen and (min-width: 64.063em) {
+    .wrapper {
+      max-width: 1024px;
+      margin: auto; } }
 
 a {
   color: #00B7FF; }
@@ -42,3 +50,14 @@ a {
   .transaction
 .submit-button {
     clear: both; }
+
+.top-bar-wrapper {
+  background-color: #444; }
+  .top-bar-wrapper
+.top-bar {
+    /* min-width 1025px, large screens */ }
+    @media only screen and (min-width: 64.063em) {
+      .top-bar-wrapper
+.top-bar {
+        max-width: 1024px;
+        margin: auto; } }

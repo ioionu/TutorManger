@@ -11,7 +11,11 @@ router.get('/', function(req, res){
 router.post('/',
   passport.authenticate('login'),
   function(req, res){
-    res.json({"qew":123});
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      token: 123 //TODO: meaningful token
+    });
   }
 );
 
