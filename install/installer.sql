@@ -14,7 +14,8 @@ CREATE TABLE users (
   id serial primary key,
   email varchar(128) NOT NULL UNIQUE,
   name varchar(128) NOT NULL,
-  password varchar(128) NOT NULL
+  password varchar(1024) NOT NULL,
+  salt varchar(256) NOT NULL
 );
 
 CREATE TABLE lessons (
@@ -32,9 +33,9 @@ CREATE TABLE transactions (
   message varchar(256) NOT NULL
 );
 
-INSERT INTO users (email, name, password) VALUES ('student@localhost', 'Test Student', 'password');
-INSERT INTO users (email, name, password) VALUES ('student2@localhost', 'Test2 Student2', 'password');
-INSERT INTO users (email, name, password) VALUES ('teacher@localhost', 'Test Teacher', 'password');
+INSERT INTO users (email, name, password, salt) VALUES ('student@localhost', 'Test Student', 'password', 'salt');
+INSERT INTO users (email, name, password, salt) VALUES ('student2@localhost', 'Test2 Student2', 'password', 'salt');
+INSERT INTO users (email, name, password, salt) VALUES ('teacher@localhost', 'Test Teacher', 'password', 'salt');
 
 INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999-01-01', 3, 1);
 INSERT INTO lessons (lesson_date, tutor, student) VALUES ('1999-02-01', 3, 1);

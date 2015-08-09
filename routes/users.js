@@ -1,13 +1,18 @@
 var express = require('express');
 var config = require('../config');
+var crypto = require('crypto');
 var router = express.Router();
 
 
-router.post('/users', function(req, res, next) {
+router.post('/', function(req, res, next) {
   console.log("create user...: ", req.body);
+
+  var salt = crypto.randomBytes(128).toString('base64');
+  var key = crypto.pbkdf2Sync(req.body.password, salt, 4096, 512, 'sha256');
+  console.log("crypto", key.toString('base64'));
   res.query(
-    "INSERT INTO users (email, name, password) VALUES ($1, $2, $3) RETURNING id",
-    [req.body.email, req.body.name, req.body.password],
+    "INSERT INTO users (email, name, password, salt) VALUES ($1, $2, $3, $4) RETURNING id",
+    [req.body.email, req.body.name, key.toString('base64'), salt],
     function(err, rows, results){
       if(err) {
         console.log("error:", err);
@@ -21,7 +26,7 @@ router.post('/users', function(req, res, next) {
 });
 
 /* GET users index. */
-router.get('/users', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.query('select * from users', function(err, rows, results) {
     if(err) {
       console.log(err);

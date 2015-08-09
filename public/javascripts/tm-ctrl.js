@@ -92,7 +92,7 @@ TMCtrl.controller(
     '$scope', 'TMLessons',
     function($scope, TMLessons){
       $scope.lessons = TMLessons.query();
-      $scope.title = "fuck yeah!!";
+      $scope.title = "lesson index!!";
       console.log($scope);
     }
   ]
