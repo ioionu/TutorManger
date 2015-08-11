@@ -45,10 +45,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+  //scub sensitive data before serial
+  delete user.password;
+  delete user.salt;
+  done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 

@@ -10,9 +10,10 @@ var router = express.Router();
  /* GET Lessons index. */
 router.get('/', function(req, res, next) {
   //res.ensureAuthenticated();
+
   console.log("lessons index", req.user);
   if(!req.isAuthenticated()) {
-    res.send(401);
+    res.sendStatus(401);
   } else {
 
     res.query(
