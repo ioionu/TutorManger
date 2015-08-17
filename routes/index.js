@@ -15,6 +15,10 @@ router.get(/^\/lessons\/.+\/view/, function(req, res, next) {
   res.render('index', { title: 'Lessons', content: '' });
 });
 
+router.get(/^\/lessons\/create/, function(req, res, next) {
+  res.render('index', { title: 'Lessons', content: '' });
+});
+
 router.get(/^\/users\/create/, function(req, res, next) {
   res.render('index', { title: 'User Create', content: '' });
 });

@@ -1,0 +1,25 @@
+<div>
+  <form ng-submit="saveLesson()">
+    <div>
+      <label for="lesson-tutor">Tutor:</label>
+      <select name="lesson-tutor" id="lesson-tutor" ng-model="TMLesson.tutor" ng-options="obj.id as obj.name for obj in TMLesson.tutors"></select>
+    </div>
+    <div>
+      <label for="lesson-student">Student:</label>
+      <select name="lesson-student" id="lesson-student" ng-model="TMLesson.student" ng-options="obj.id as obj.name for obj in TMLesson.students"></select>
+    </div>
+    <div>
+      <label for="inputDate">Start Date:</label>
+      <input type="date" ng-model="inputDate" name="inputDate" id="inputDate" required />
+      <label for="inputDateTime">Start Time:</label>
+      <input type="time" ng-model="inputDateTime" placeholder="inputDateTime" name="inputDateTime" id="inputDateTime" required />
+    </div>
+    <div>
+      <label for="inputDate-end">End Date:</label>
+      <input type="date" ng-model="inputDateEnd" name="inputDateEnd" id="inputDateEnd" required />
+      <label for="inputDateTime-end">End Time:</label>
+      <input type="time" ng-model="inputDateTimeEnd" name="inputDateTimeEnd" id="inputDateTimeEnd" required />
+    </div>
+    <input type="submit" name="submit" value="Save" class="button"/>
+  </form>
+</div>

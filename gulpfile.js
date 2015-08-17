@@ -10,6 +10,9 @@ gulp.task('copy', function(){
     'bower_components/stripe-angular/stripe-angular.js',
     'bower_components/foundation/js/foundation.js',
     'bower_components/foundation/js/foundation/foundation.alert.js',
+    'bower_components/pickadate/lib/picker.js',
+    'bower_components/pickadate/lib/picker.date.js',
+    'bower_components/pickadate/lib/picker.time.js',
     'node_modules/angular-resource/angular-resource.js',
     'node_modules/angular-route/angular-route.js',
     'node_modules/card.js/dist/card.js',
@@ -30,6 +33,9 @@ gulp.task('copy-css', function(){
     'bower_components/foundation/css/normalize.css.map',
     'bower_components/foundation/css/foundation.css',
     'bower_components/foundation/css/foundation.css.map',
+    'bower_components/pickadate/lib/themes/default.css',
+    'bower_components/pickadate/lib/themes/default.date.css',
+    'bower_components/pickadate/lib/themes/default.time.css'
   ])
   .pipe(
     gulp.dest('public/stylesheets/')

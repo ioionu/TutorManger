@@ -37,6 +37,11 @@ TMApp.config([
         controller: 'TMCtrlLessonsIndex',
         title: 'Lessons Index',
       })
+      .when('/lessons/create', {
+        templateUrl: 'partials/lesson-create.html',
+        controller: 'TMCtrlLessonCreate',
+        title: 'Lessons Index',
+      })
       .when('/lessons/:id/view', {
         templateUrl: 'partials/lessons-view.html',
         controller: 'TMCtrlLessonsView',

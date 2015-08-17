@@ -1,0 +1,25 @@
+{
+  "name": "TutorManager",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ioionu/TutorManger",
+  "authors": [
+    "josh <io@ioio.nu>"
+  ],
+  "license": "GPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15",
+    "foundation-datepicker": "~1.4.0",
+    "foundation": "~5.5.2",
+    "jquery-creditcardvalidator": "~1.0.0",
+    "stripe-angular": "~1.0.2",
+    "pickadate": "~3.5.6"
+  }
+}

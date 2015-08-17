@@ -7,6 +7,7 @@ var router = express.Router();
 
 /* GET payment index. */
 router.get('/', function(req, res, next) {
+  
   if(!req.isAuthenticated()) {
     res.send(401);
   }

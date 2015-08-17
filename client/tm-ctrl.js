@@ -112,6 +112,40 @@ TMCtrl.controller(
   ]
 );
 
+//create lesson
+TMCtrl.controller(
+  'TMCtrlLessonCreate',
+  [
+    '$scope', 'TMLessons', 'TMUser',
+    function($scope, TMLessons, TMUser){
+
+      //add date and time picker to date fields
+      var date_format = "yyyy-mm-dd";
+      var now = new Date();
+      var now_time = now.getHours() + ":" + now.getMinutes() + ":00";
+      $('#inputDate, #inputDateEnd').pickadate({format: date_format});
+      //$('#inputDateTime, #inputDateTimeEnd').pickatime({format: 'hh:i:00'});
+
+      $scope.inputDate = now;
+      $scope.inputDateEnd = now;
+      $scope.inputDateTime = now;
+      $scope.inputDateTimeEnd = now;
+
+      // TODO: filter to relevant users
+      var users = TMUser.query();
+
+      $scope.TMLesson = new TMLessons();
+      $scope.TMLesson.tutors = users;
+      $scope.TMLesson.students = users;
+
+      $scope.saveLesson = function(){
+        var dateTimeCombo = $scope.inputDate + $scope.inputDateTime;
+        $scope.TMLesson.lesson_date = dateTimeCombo;
+        console.log("date", $scope.TMLesson.lesson_date);
+      };
+    }
+  ]
+);
 // /end lessons
 
 //create user
