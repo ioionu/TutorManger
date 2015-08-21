@@ -20,6 +20,6 @@
     "foundation": "~5.5.2",
     "jquery-creditcardvalidator": "~1.0.0",
     "stripe-angular": "~1.0.2",
-    "pickadate": "~3.5.6"
+    "pickadate": "~3.5.6",
   }
 }

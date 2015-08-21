@@ -42,30 +42,52 @@ router.get('/', function(req, res, next) {
   }
 });
 
-router.post('/', function(req, res, next){
+router.post('/', function(req, res, next) {
 
+  var qstring = 'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4) RETURNING id';
+  res.query(
+    qstring,
+    [req.body.lesson_date, req.body.lesson_date_end, req.body.tutor, req.body.student],
+    function(err, rows, results){
+      console.log("Creating Lesson", req.body.lesson_date, req.body.lesson_date_end, req.body.tutor, req.body.student);
+      if(err) {
+        console.log("Lesson creation error:", err);
+        res.render('error-db', { message: 'DB Error' });
+      }
+      console.log("row:", rows, results);
+      res.json({id: rows[0].id});
+      //next();
+    }
+  );
+
+  res.json({1:2});
 });
 
 /* GET lessons instance */
 router.get('/:id', function(req, res, next) {
   //console.log(req.params.id);
+  var qstring = 'select ' +
+    'lessons.id, ' +
+    'lessons.lesson_date, ' +
+    'tutor.name as tutor_name, ' +
+    'student.name as student_name, ' +
+    'payments.id as payment_id, ' +
+    'payments.amount, ' +
+    'payments.status ' +
+    'from lessons ' +
+    'join users as tutor ' +
+    'on lessons.tutor = tutor.id ' +
+    'join users as student ' +
+    'on lessons.student = student.id ' +
+    'join payments as payments ' +
+    'on lessons.id = payments.lessonid ' +
+    'where lessons.id = $1::integer;'
+  ;
+  console.log(qstring);
+
+
   res.query(
-    'select ' +
-      'lessons.id, ' +
-      'lessons.lesson_date, ' +
-      'tutor.name as tutor_name, ' +
-      'student.name as student_name, ' +
-      'payments.id as payment_id, ' +
-      'payments.amount, ' +
-      'payments.status ' +
-      'from lessons ' +
-      'join users as tutor ' +
-      'on lessons.tutor = tutor.id ' +
-      'join users as student ' +
-      'on lessons.student = student.id ' +
-      'join payments as payments ' +
-      'on lessons.id = payments.lessonid ' +
-      'where lessons.id = $1::integer;',
+    qstring,
     [req.params.id],
     function(err, rows, results) {
     if(err) {

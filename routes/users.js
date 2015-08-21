@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
 
 /* GET users index. */
 router.get('/', function(req, res, next) {
-  res.query('select * from users', function(err, rows, results) {
+  res.query('select id, email, name, status from users', function(err, rows, results) {
     if(err) {
       console.log(err);
       res.render('error-db', { message: 'DB Error' });

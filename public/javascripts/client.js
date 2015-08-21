@@ -2,6 +2,7 @@ console.log("hello from client");
 var TMApp = angular.module('TMApp', [
   'ngResource',
   'ngRoute',
+  'ngMessages',
   'TMCtrl',
   'TMAppService',
   'TMFilters',

@@ -123,7 +123,7 @@ TMCtrl.controller(
       var date_format = "yyyy-mm-dd";
       var now = new Date();
       var now_time = now.getHours() + ":" + now.getMinutes() + ":00";
-      $('#inputDate, #inputDateEnd').pickadate({format: date_format});
+      //$('#inputDate, #inputDateEnd').pickadate({format: date_format});
       //$('#inputDateTime, #inputDateTimeEnd').pickatime({format: 'hh:i:00'});
 
       $scope.inputDate = now;
@@ -139,9 +139,28 @@ TMCtrl.controller(
       $scope.TMLesson.students = users;
 
       $scope.saveLesson = function(){
-        var dateTimeCombo = $scope.inputDate + $scope.inputDateTime;
-        $scope.TMLesson.lesson_date = dateTimeCombo;
-        console.log("date", $scope.TMLesson.lesson_date);
+        //inputDateEnd.$error = {fuck: true};
+        console.log("Err", $scope.inputDateTimeEnd.$error, $scope.inputDateTimeEnd.$valid);
+        // add user time to date
+        $scope.inputDate.setHours( $scope.inputDateTime.getHours() );
+        $scope.inputDate.setMinutes( $scope.inputDateTime.getMinutes() );
+        $scope.inputDate.setSeconds( $scope.inputDateTime.getSeconds() );
+        $scope.TMLesson.lesson_date = $scope.inputDate;
+
+        // add user time to date end
+        $scope.inputDateEnd.setHours( $scope.inputDateTimeEnd.getHours() );
+        $scope.inputDateEnd.setMinutes( $scope.inputDateTimeEnd.getMinutes() );
+        $scope.inputDateEnd.setSeconds( $scope.inputDateTimeEnd.getSeconds() );
+        $scope.TMLesson.lesson_date_end = $scope.inputDateEnd;
+
+        // check nd date follows start date
+        if($scope.TMLesson.lesson_date_end < $scope.TMLesson.lesson_date) {
+          alert("Temporal anomaly detected");
+        } else {
+          $scope.TMLesson.$save();
+        }
+
+        console.log("saveLessonDate: ", $scope.TMLesson.lesson_date.toLocaleString(), $scope.TMLesson.lesson_date_end.toLocaleString());
       };
     }
   ]
