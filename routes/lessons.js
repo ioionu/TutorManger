@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
       'select ' +
         'lessons.id,' +
         'lessons.lesson_date,' +
+        'lessons.lesson_date_end,' +
         'tutor.name as tutor_name, ' +
         'student.name as student_name ' +
         'from lessons ' +
@@ -67,6 +68,7 @@ router.get('/:id', function(req, res, next) {
   var qstring = 'select ' +
     'lessons.id, ' +
     'lessons.lesson_date, ' +
+    'lessons.lesson_date_end, ' +
     'tutor.name as tutor_name, ' +
     'student.name as student_name, ' +
     'payments.id as payment_id, ' +
@@ -100,9 +102,13 @@ router.get('/:id', function(req, res, next) {
         status: rows[i].status,
       });
     }
+    var duration_seconds = (rows[0].lesson_date_end - rows[0].lesson_date);
+
     var lesson = {
       id: rows[0].id,
       lesson_date: rows[0].lesson_date,
+      lesson_date_end: rows[0].lesson_date_end,
+      duration: duration_seconds,
       tutor_name: rows[0].tutor_name,
       student_name: rows[0].student_name,
       payments: payments

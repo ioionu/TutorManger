@@ -2,6 +2,37 @@
 <h2>Tutor: {{lesson.tutor_name}}</h2>
 <h2>Student: {{lesson.student_name}}</h2>
 <p>TODO: add lesson desc</p>
+<h2>Lesson Date</h2>
+<table>
+  <thead>
+    <tr>
+      <td>
+        Start
+      </td>
+      <td>
+        Finish
+      </td>
+      <td>
+        Duration
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {{lesson.lesson_date}}
+      </td>
+      <td>
+        {{lesson.lesson_date_end}}
+      </td>
+      <td>
+        {{lesson.duration}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<h2>Payment Information</h2>
 <table class="payment-index">
   <thead>
     <tr>

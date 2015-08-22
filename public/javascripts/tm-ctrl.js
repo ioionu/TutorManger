@@ -119,17 +119,10 @@ TMCtrl.controller(
     '$scope', '$location', 'TMLessons', 'TMUser',
     function($scope, $location, TMLessons, TMUser){
 
-      //add date and time picker to date fields
-      var date_format = "yyyy-mm-dd";
-      var now = new Date();
-      var now_time = now.getHours() + ":" + now.getMinutes() + ":00";
-      //$('#inputDate, #inputDateEnd').pickadate({format: date_format});
-      //$('#inputDateTime, #inputDateTimeEnd').pickatime({format: 'hh:i:00'});
-
-      $scope.inputDate = now;
-      $scope.inputDateEnd = now;
-      $scope.inputDateTime = now;
-      $scope.inputDateTimeEnd = now;
+      $scope.inputDate = new Date();
+      $scope.inputDateEnd = new Date();
+      $scope.inputDateTime = new Date();
+      $scope.inputDateTimeEnd = new Date();
 
       // TODO: filter to relevant users
       var users = TMUser.query();
