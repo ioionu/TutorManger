@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
           console.log(err);
           res.render('error-db', { message: 'DB Error' });
         }
-        console.log(rows);
+        console.log("Lesson Index:", rows);
         res.json(rows);
       }
     );
@@ -59,8 +59,6 @@ router.post('/', function(req, res, next) {
       //next();
     }
   );
-
-  res.json({1:2});
 });
 
 /* GET lessons instance */
@@ -79,7 +77,7 @@ router.get('/:id', function(req, res, next) {
     'on lessons.tutor = tutor.id ' +
     'join users as student ' +
     'on lessons.student = student.id ' +
-    'join payments as payments ' +
+    'left join payments as payments ' +
     'on lessons.id = payments.lessonid ' +
     'where lessons.id = $1::integer;'
   ;

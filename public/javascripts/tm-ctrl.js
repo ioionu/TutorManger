@@ -116,8 +116,8 @@ TMCtrl.controller(
 TMCtrl.controller(
   'TMCtrlLessonCreate',
   [
-    '$scope', 'TMLessons', 'TMUser',
-    function($scope, TMLessons, TMUser){
+    '$scope', '$location', 'TMLessons', 'TMUser',
+    function($scope, $location, TMLessons, TMUser){
 
       //add date and time picker to date fields
       var date_format = "yyyy-mm-dd";
@@ -157,7 +157,10 @@ TMCtrl.controller(
         if($scope.TMLesson.lesson_date_end < $scope.TMLesson.lesson_date) {
           alert("Temporal anomaly detected");
         } else {
-          $scope.TMLesson.$save();
+          $scope.TMLesson.$save().then(function(){
+            console.log("after save");
+            $location.path('/lessons/' + $scope.TMLesson.id + '/view');
+          });
         }
 
         console.log("saveLessonDate: ", $scope.TMLesson.lesson_date.toLocaleString(), $scope.TMLesson.lesson_date_end.toLocaleString());
