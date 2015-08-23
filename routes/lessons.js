@@ -44,6 +44,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.sendStatus(401);
+  } else {
+
 
   var qstring = 'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4) RETURNING id';
   res.query(
@@ -60,10 +64,14 @@ router.post('/', function(req, res, next) {
       //next();
     }
   );
-});
+}});
 
 /* GET lessons instance */
 router.get('/:id', function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.sendStatus(401);
+  } else {
+
   //console.log(req.params.id);
   var qstring = 'select ' +
     'lessons.id, ' +
@@ -117,7 +125,7 @@ router.get('/:id', function(req, res, next) {
     console.log("row:", rows, results);
     res.json(lesson);
   });
-});
+}});
 
 
  /*

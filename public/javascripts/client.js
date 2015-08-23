@@ -21,52 +21,62 @@ TMApp.config([
       when('/', {
         templateUrl: 'partials/index.html',
         controller: 'TMCtrlIndex',
-        title: 'TutorManager'
+        title: 'TutorManager',
+        access: { requiredLogin: false }
       })
       .when('/payments', {
         templateUrl: 'partials/payment-index.html',
         controller: 'TMCtrlPaymentIndex',
-        title: 'Payments Index'
+        title: 'Payments Index',
+        access: { requiredLogin: true }
       })
       .when('/payments/:id/view', {
         templateUrl: 'partials/payment-view.html',
         controller: 'TMCtrlPaymentView',
-        title: 'Payments View'
+        title: 'Payments View',
+        access: { requiredLogin: true }
       })
       .when('/lessons', {
         templateUrl: 'partials/lessons-index.html',
         controller: 'TMCtrlLessonsIndex',
         title: 'Lessons Index',
+        access: { requiredLogin: true }
       })
       .when('/lessons/create', {
         templateUrl: 'partials/lesson-create.html',
         controller: 'TMCtrlLessonCreate',
-        title: 'Lessons Index',
+        title: 'Lessons Create',
+        access: { requiredLogin: true }
       })
       .when('/lessons/:id/view', {
         templateUrl: 'partials/lessons-view.html',
         controller: 'TMCtrlLessonsView',
         title: 'Lesson View',
+        access: { requiredLogin: true }
       })
       .when('/users', {
         templateUrl: 'partials/user-index.html',
         controller: 'TMCtrlUserIndex',
         title: 'User Index',
+        access: { requiredLogin: true }
       })
       .when('/users/create', {
         templateUrl: 'partials/user-create.html',
         controller: 'TMCtrlUserCreate',
-        title: 'Create User'
+        title: 'Create User',
+        access: { requiredLogin: false }
       })
       .when('/login', {
         templateUrl: 'partials/user-login.html',
         controller: 'TMCtrlUser',
-        title: 'Login User'
+        title: 'Login User',
+        access: { requiredLogin: false }
       })
       .when('/logout', {
         templateUrl: 'partials/user-logout.html',
         controller: 'TMCtrlUser',
-        title: 'User Logout'
+        title: 'User Logout',
+        access: { requiredLogin: false }
       })
       ;
   }
@@ -74,6 +84,12 @@ TMApp.config([
 
 
 TMApp.run(['$location', '$rootScope', 'TMUserService', function($location, $rootScope, TMUserService) {
+  $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+    if (nextRoute.access.requiredLogin && !TMUserService.isLogged) {
+      console.log("Auth fail:", nextRoute.access.requiredLogin, TMUserService.isLogged);
+      $location.path("/login");
+    }
+  });
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
     $rootScope.title = current.$$route.title;
