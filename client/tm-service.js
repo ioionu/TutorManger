@@ -42,16 +42,33 @@ TMAppService.factory('TMAuthenticationService',
 );
 
 TMAppService.factory('TMUserService',
-  function($http) {
+  function($http, $window) {
     return {
       logIn: function(username, password) {
         return $http.post('api1/login', {username: username, password: password});
       },
       logOut: function() {
         console.log("hello logout");
+        $window.sessionStorage.isLoggedIn = 'false';
       },
       isLogged: false,
-      user: false
+      user: false,
+      isLoggedIn: function(){
+        console.log("loggedin", $window.sessionStorage.isLoggedIn);
+
+        if($window.sessionStorage.isLoggedIn === 'true') {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      getUserName: function() {
+        if(this.isLoggedIn()) {
+          return $window.sessionStorage.username;
+        } else {
+          return "Anon";
+        }
+      }
     };
   }
 );

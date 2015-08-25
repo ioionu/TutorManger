@@ -2,8 +2,7 @@
 
   <form ng-submit="saveLesson()" name="lessonForm">
     <div>
-      <label for="lesson-tutor">Tutor:</label>
-      <select name="lesson-tutor" id="lesson-tutor" ng-model="TMLesson.tutor" ng-options="obj.id as obj.name for obj in TMLesson.tutors"></select>
+      <div id="lesson-tutor">Tutor: <span ng-bind="username"></span></div>
     </div>
     <div>
       <label for="lesson-student">Student:</label>

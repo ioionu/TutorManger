@@ -13,6 +13,7 @@ TMApp.config([
   '$httpProvider',
   '$routeProvider',
   '$locationProvider',
+
   function($httpProvider, $routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
     Stripe.setPublishableKey("pk_test_SmtJiXCEwaof3aL3xudljbMq");
@@ -83,10 +84,13 @@ TMApp.config([
 ]);
 
 
-TMApp.run(['$location', '$rootScope', 'TMUserService', function($location, $rootScope, TMUserService) {
+TMApp.run([
+  '$location', '$rootScope', 'TMUserService',
+  function($location, $rootScope, TMUserService) {
   $rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-    if (nextRoute.access.requiredLogin && !TMUserService.isLogged) {
-      console.log("Auth fail:", nextRoute.access.requiredLogin, TMUserService.isLogged);
+    console.log("Login State:", TMUserService.isLoggedIn());
+
+    if (nextRoute.access.requiredLogin && !TMUserService.isLoggedIn()) {
       $location.path("/login");
     }
   });

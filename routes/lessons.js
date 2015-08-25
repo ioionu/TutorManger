@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
   var qstring = 'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4) RETURNING id';
   res.query(
     qstring,
-    [req.body.lesson_date, req.body.lesson_date_end, req.body.tutor, req.body.student],
+    [req.body.lesson_date, req.body.lesson_date_end, req.user.id, req.body.student],
     function(err, rows, results){
       console.log("Creating Lesson", req.body.lesson_date, req.body.lesson_date_end, req.body.tutor, req.body.student);
       if(err) {
@@ -93,38 +93,38 @@ router.get('/:id', function(req, res, next) {
   ;
   console.log(qstring);
 
-
   res.query(
     qstring,
     [req.params.id],
     function(err, rows, results) {
-    if(err) {
-      console.log("error:", err);
-      res.render('error-db', { message: 'DB Error' });
-    }
-    var payments = [];
-    for (var i = 0; i < rows.length; i++) {
-      payments.push({
-        id: rows[i].payment_id,
-        amount: rows[i].amount,
-        status: rows[i].status,
-      });
-    }
-    var duration_seconds = (rows[0].lesson_date_end - rows[0].lesson_date);
+      if(err) {
+        console.log("error:", err);
+        res.render('error-db', { message: 'DB Error' });
+      }
+      var payments = [];
+      for (var i = 0; i < rows.length; i++) {
+        payments.push({
+          id: rows[i].payment_id,
+          amount: rows[i].amount,
+          status: rows[i].status,
+        });
+      }
+      var duration_seconds = (rows[0].lesson_date_end - rows[0].lesson_date);
 
-    var lesson = {
-      id: rows[0].id,
-      lesson_date: rows[0].lesson_date,
-      lesson_date_end: rows[0].lesson_date_end,
-      duration: duration_seconds,
-      tutor_name: rows[0].tutor_name,
-      student_name: rows[0].student_name,
-      payments: payments
-    };
+      var lesson = {
+        id: rows[0].id,
+        lesson_date: rows[0].lesson_date,
+        lesson_date_end: rows[0].lesson_date_end,
+        duration: duration_seconds,
+        tutor_name: rows[0].tutor_name,
+        student_name: rows[0].student_name,
+        payments: payments
+      };
 
-    console.log("row:", rows, results);
-    res.json(lesson);
-  });
+      console.log("row:", rows, results);
+      res.json(lesson);
+    }
+  );
 }});
 
 

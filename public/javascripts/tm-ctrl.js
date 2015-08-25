@@ -116,8 +116,8 @@ TMCtrl.controller(
 TMCtrl.controller(
   'TMCtrlLessonCreate',
   [
-    '$scope', '$location', 'TMLessons', 'TMUser',
-    function($scope, $location, TMLessons, TMUser){
+    '$scope', '$location', 'TMLessons', 'TMUser', 'TMUserService',
+    function($scope, $location, TMLessons, TMUser, TMUserService){
 
       $scope.inputDate = new Date();
       $scope.inputDateEnd = new Date();
@@ -130,6 +130,8 @@ TMCtrl.controller(
       $scope.TMLesson = new TMLessons();
       $scope.TMLesson.tutors = users;
       $scope.TMLesson.students = users;
+      $scope.username = TMUserService.getUserName();
+
 
       $scope.saveLesson = function(){
         //inputDateEnd.$error = {fuck: true};
@@ -227,6 +229,8 @@ TMCtrl.controller(
           TMUserService.isLogged = true;
           TMUserService.user = data;
           $window.sessionStorage.token = data.token;
+          $window.sessionStorage.isLoggedIn = 'true';
+          $window.sessionStorage.username = data.name;
           $location.path("/");
         }).error(function(status, data) {
           console.log(status);
@@ -237,6 +241,7 @@ TMCtrl.controller(
 
     $scope.logout = function() {
       console.log("logging out");
+      TMUserService.logOut();
       if (TMUserService.isLogged) {
         TMUserService.isLogged = false;
         delete $window.sessionStorage.token;
