@@ -61,27 +61,28 @@ passport.use('login', new LocalStrategy({
   },
   function(req, username, password, done) {
     console.log("local auth", username, password);
-    req.res.query('select * from users where email = $1;', [username], function(err, rows, results){
-      console.log('results', rows, err);
+    req.res.query.first("select * from users where email = $1 AND status='active';", [username], function(err, rows, results){
+      console.log('results', rows, err, rows === 'undefined');
 
-      if (err || rows.length === 0) {
+      if (err || typeof rows === 'undefined') {
         console.log("error:", err);
         done(null, false, {message: 'User not found'});
-      }
-
-      var user = rows[0];
-      var salt = user.salt;
-      var pass = user.password;
-      var key = crypto.pbkdf2Sync(password, salt, 4096, 512, 'sha256');
-      console.log("crypto  ", key.toString('base64'));
-      console.log("password", user.password);
-
-      if(user.password === key.toString('base64')) {
-        console.log("hello:", key.toString('base64'), user.password);
-        return done(null, user);
       } else {
-        console.log("login fail:", password, user.password);
-        return done(null, false, {message: 'yoo no pass!'});
+
+        var user = rows;
+        var salt = user.salt;
+        var pass = user.password;
+        var key = crypto.pbkdf2Sync(password, salt, 4096, 512, 'sha256');
+        console.log("crypto  ", key.toString('base64'));
+        console.log("password", user.password);
+
+        if(user.password === key.toString('base64')) {
+          console.log("hello:", key.toString('base64'), user.password);
+          return done(null, user);
+        } else {
+          console.log("login fail:", password, user.password);
+          return done(null, false, {message: 'yoo no pass!'});
+        }
       }
     });
 
