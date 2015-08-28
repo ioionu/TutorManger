@@ -67,6 +67,12 @@ TMApp.config([
         title: 'Create User',
         access: { requiredLogin: false }
       })
+      .when('/users/confirm/:id', {
+        templateUrl: 'partials/user-confirm.html',
+        controller: 'TMCtrlUserConfirm',
+        title: 'Confirm User',
+        access: { requiredLogin: false }
+      })
       .when('/login', {
         templateUrl: 'partials/user-login.html',
         controller: 'TMCtrlUser',

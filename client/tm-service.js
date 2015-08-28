@@ -30,6 +30,16 @@ TMAppService.factory('TMUser',
   }
 );
 
+TMAppService.factory('TMUserConfirm',
+  function($resource) {
+    return $resource('api1/usersconfirm/:id', {}, {
+      save: {
+        method: 'POST'
+      }
+    });
+  }
+);
+
 TMAppService.factory('TMAuthenticationService',
   function() {
     var auth = {
@@ -121,7 +131,9 @@ TMAppService.factory(
       },
       responseError: function(reject){
         console.log("i am response error", reject);
-        $location.path('/login');
+        if(reject.status === 401) {
+          $location.path('/login');
+        }
         return $q.reject(reject);
       }
     };

@@ -177,10 +177,27 @@ TMCtrl.controller(
         var p = $scope.TMUser.$save(function(){
           console.log("user saved");
         });
-        p.then(function(){
+        p.then(function(data){
           console.log("and then:", $scope);
           $location.path('/users/' + $scope.TMUser.id + '/view');
+        }, function(error){
+          alert(error.data);
         });
+      };
+    }
+  ]
+);
+
+//confirm user
+TMCtrl.controller(
+  'TMCtrlUserConfirm',
+  [
+    '$scope', '$location', 'TMUserConfirm',
+    function($scope, $location, TMUserConfirm){
+      $scope.TMUserConfirm = new TMUserConfirm();
+      $scope.TMUserConfirm.confirm = $location.path().split('/').pop();
+      $scope.confirmUser = function() {
+        $scope.TMUserConfirm.$save();
       };
     }
   ]

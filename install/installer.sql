@@ -16,7 +16,8 @@ CREATE TABLE users (
   name varchar(128) NOT NULL,
   password varchar(1024) NOT NULL,
   salt varchar(256) NOT NULL,
-  status varchar(16) NOT NULL
+  status varchar(16) NOT NULL,
+  confirm varchar(256)
 );
 
 CREATE TABLE lessons (

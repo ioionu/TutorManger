@@ -17,6 +17,7 @@ var db = require('./db.js');
 var config = require('./config.js');
 
 var users = require('./routes/users');
+var usersconfirm = require('./routes/usersconfirm');
 var routes = require('./routes/index');
 var login = require('./routes/login');
 var payments = require('./routes/payments');
@@ -105,6 +106,7 @@ app.use('/api1/testthing', testthing);
 app.use('/api1/transactions', transactions);
 app.use('/api1/payments', payments);
 app.use('/api1/users', users);
+app.use('/api1/usersconfirm', usersconfirm);
 app.use('/api1/login', login);
 app.use('/api1/lessons', lessons);
 //app.use('/api1', payments);
