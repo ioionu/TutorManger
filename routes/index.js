@@ -23,9 +23,14 @@ router.get(/^\/users\/create/, function(req, res, next) {
   res.render('index', { title: 'User Create', content: '' });
 });
 
+router.get(/^\/users\/unconfirmed/, function(req, res, next) {
+  res.render('index', { title: 'Check Your Email :)', content: '' });
+});
+
 router.get(/^\/users\//, function(req, res, next) {
   res.render('index', { title: 'User Index', content: '' });
 });
+
 
 router.get(/^\/login/, function(req, res, next) {
   res.render('index', { title: 'User Login', content: '' });

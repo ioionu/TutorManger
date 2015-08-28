@@ -7,7 +7,7 @@ router.post('/', function(req, res, next) {
   console.log("create user...: ", req.body);
 
   res.query.first(
-    "SELECT id from users WHERE confirm=$1", 
+    "SELECT id from users WHERE confirm=$1",
     [req.body.confirm],
     function(err, rows, results){
       console.log(rows);
