@@ -5,15 +5,15 @@ div(class="top-bar-wrapper")
         h1
           a(href="/") TutorManager
     section( class="top-bar-section" )
-      ul(ng-show="isLogged")
+      ul(ng-show="isLoggedIn()")
         li
           a( href='/lessons' ng-bind="getUserName()") ...
         li
           a( href='/logout') logout
-      ul(ng-hide="isLogged")
+      ul(ng-hide="isLoggedIn()")
         li
           a( href='/login' class='button') Login
-      ul( class="right" ng-show="isLogged")
+      ul( class="right" ng-show="isLoggedIn()")
         li()
           a( href="/payments") Payments
         li

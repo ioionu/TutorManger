@@ -13,6 +13,7 @@ gulp.task('copy', function(){
     'node_modules/angular-resource/angular-resource.js',
     'node_modules/angular-route/angular-route.js',
     'node_modules/angular-messages/angular-messages.js',
+    'node_modules/angular-local-storage/dist/angular-local-storage.js',
     'node_modules/card.js/dist/card.js',
     'client/client.js',
     'client/lib.js',

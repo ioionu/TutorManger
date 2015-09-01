@@ -3,6 +3,7 @@ var TMApp = angular.module('TMApp', [
   'ngResource',
   'ngRoute',
   'ngMessages',
+  'LocalStorageModule',
   'TMCtrl',
   'TMAppService',
   'TMFilters',

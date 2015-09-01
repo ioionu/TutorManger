@@ -52,21 +52,35 @@ TMAppService.factory('TMAuthenticationService',
 );
 
 TMAppService.factory('TMUserService',
-  function($http, $window) {
+  function($http, $window, $location, localStorageService) {
     return {
       logIn: function(username, password) {
-        return $http.post('api1/login', {username: username, password: password});
+        $http.post('api1/login', {username: username, password: password})
+        .success(function(data) {
+          //TMUserService.isLogged = true;
+          //TMUserService.user = data;
+          localStorageService.set('isLoggedIn', 'true');
+          localStorageService.set('username', data.name);
+          localStorageService.set('token', data.token); //TODO: token based auth
+
+          $location.path("/");
+        }).error(function(status, data) {
+          console.log(status);
+          console.log(data);
+        });
       },
       logOut: function() {
         console.log("hello logout");
-        $window.sessionStorage.isLoggedIn = 'false';
+        localStorageService.set('isLoggedIn', 'false');
+        localStorageService.set('username', 'Anon');
+        $location.path("/");
       },
-      isLogged: false,
-      user: false,
+      //isLogged: false,
+      //user: false,
       isLoggedIn: function(){
-        console.log("loggedin", $window.sessionStorage.isLoggedIn);
+        console.log("loggedin", localStorageService.get('isLoggedIn'));
 
-        if($window.sessionStorage.isLoggedIn === 'true') {
+        if(localStorageService.get('isLoggedIn') === 'true') {
           return true;
         } else {
           return false;
@@ -74,7 +88,7 @@ TMAppService.factory('TMUserService',
       },
       getUserName: function() {
         if(this.isLoggedIn()) {
-          return $window.sessionStorage.username;
+          return localStorageService.get('username');
         } else {
           return "Anon";
         }
