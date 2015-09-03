@@ -5,6 +5,7 @@ query.connectionParameters = config.db_connection_string;
 
 var db = function(req, res, next) {
   res.query = query;
+  res.yo = function(who){console.log("yo", who);};
   next();
 };
 

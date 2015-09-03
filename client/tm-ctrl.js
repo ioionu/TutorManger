@@ -131,6 +131,7 @@ TMCtrl.controller(
       $scope.TMLesson.tutors = users;
       $scope.TMLesson.students = users;
       $scope.username = TMUserService.getUserName();
+      $scope.TMLesson.amount = 0;
 
 
       $scope.saveLesson = function(){

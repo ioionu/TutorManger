@@ -49,21 +49,31 @@ router.post('/', function(req, res, next) {
   } else {
 
 
-  var qstring = 'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4) RETURNING id';
-  res.query(
-    qstring,
-    [req.body.lesson_date, req.body.lesson_date_end, req.user.id, req.body.student],
-    function(err, rows, results){
-      console.log("Creating Lesson", req.body.lesson_date, req.body.lesson_date_end, req.body.tutor, req.body.student);
-      if(err) {
-        console.log("Lesson creation error:", err);
-        res.render('error-db', { message: 'DB Error' });
-      }
-      console.log("row:", rows, results);
-      res.json({id: rows[0].id});
-      //next();
-    }
-  );
+  var lessone_id = 0;
+  var params = {
+    lesson_date: req.body.lesson_date,
+    lesson_date_end: req.body.lesson_date_end,
+    tutor: req.user.id,
+    student: req.body.student
+  };
+  res.rec.lesson.create(params)
+  .then(function(rows, results){
+    //TODO: errror handle
+    lessone_id = rows[0][0].id; //TODO: WTF? why [0][0]?
+    var params = {
+      description: "i am description",
+      userid: req.body.student,
+      lessonid: lessone_id,
+      amount: req.body.amount
+    };
+    return res.rec.payment.create(params);
+  })
+  .then(function(data){
+    console.log("post payment creation", data);
+    res.json({id: lessone_id});
+    //next();
+  });
+
 }});
 
 /* GET lessons instance */

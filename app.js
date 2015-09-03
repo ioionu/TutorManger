@@ -16,6 +16,9 @@ var db = require('./db.js');
 //config is in config.js
 var config = require('./config.js');
 
+//record middleware
+var record = require('./record.js');
+
 var users = require('./routes/users');
 var usersconfirm = require('./routes/usersconfirm');
 var routes = require('./routes/index');
@@ -40,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(db);
+app.use(record);
 
 app.use(session({secret: config.session.secret}));
 app.use(passport.initialize());
