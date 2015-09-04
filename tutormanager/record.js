@@ -9,6 +9,37 @@ var record = function(req, res, next) {
       );
       return promise;
     },
+    get: function(params){
+      var q = 'select ' +
+        'lessons.id, ' +
+        'lessons.lesson_date, ' +
+        'lessons.lesson_date_end, ' +
+        'tutor.name as tutor_name, ' +
+        'student.name as student_name, ' +
+        'payments.id as payment_id, ' +
+        'payments.amount, ' +
+        'payments.status ' +
+        'from lessons ' +
+        'join users as tutor ' +
+        'on lessons.tutor = tutor.id ' +
+        'join users as student ' +
+        'on lessons.student = student.id ' +
+        'left join payments as payments ' +
+        'on lessons.id = payments.lessonid '
+      ;
+
+      //catch them all or just one?
+      var p;
+      if(typeof params.id === undefined) {
+        q = "SELECT * FROM payments";
+        p = [];
+      } else {
+        q = "SELECT * FROM payments WHERE id=$1";
+        p = [params.id];
+      }
+      var promise = res.query(q,p);
+      return promise;
+    }
   };
   rec.payment = {
     create: function(params)

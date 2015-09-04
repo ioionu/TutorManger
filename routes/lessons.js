@@ -16,30 +16,11 @@ router.get('/', function(req, res, next) {
     res.sendStatus(401);
   } else {
 
-    res.query(
-      'select ' +
-        'lessons.id,' +
-        'lessons.lesson_date,' +
-        'lessons.lesson_date_end,' +
-        'tutor.name as tutor_name, ' +
-        'student.name as student_name ' +
-        'from lessons ' +
-        'join users as tutor ' +
-        'on lessons.tutor = tutor.id ' +
-        'join users as student ' +
-        'on lessons.student = student.id ' +
-        'WHERE lessons.student = $1::integer OR ' +
-        'lessons.tutor = $1::integer;',
-      [req.user.id],
-      function(err, rows, results) {
-        if(err) {
-          console.log(err);
-          res.render('error-db', { message: 'DB Error' });
-        }
-        console.log("Lesson Index:", rows);
-        res.json(rows);
-      }
-    );
+    res.tutorManager.lesson.get()
+    .then(function(rows, results) {
+      console.log("Lesson Index:", rows);
+      res.json(rows[0]);
+    });
   }
 });
 

@@ -16,9 +16,7 @@ var db = require('./db.js');
 //config is in config.js
 var config = require('./config.js');
 
-//record middleware
-var record = require('./record.js');
-
+//map routes
 var users = require('./routes/users');
 var usersconfirm = require('./routes/usersconfirm');
 var routes = require('./routes/index');
@@ -43,7 +41,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(db);
+
+//record middleware
+var record = require('./tutormanager/record');
 app.use(record);
+
+//tutorManager middleware
+var tutorManager = require('./tutormanager/tutormanager');
+app.use(tutorManager);
+
 
 app.use(session({secret: config.session.secret}));
 app.use(passport.initialize());
