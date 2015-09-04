@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     res.sendStatus(401);
   } else {
 
-    res.tutorManager.lesson.get()
+    res.tutorManager.lesson.get({id: req.user.id})
     .then(function(rows, results) {
       console.log("Lesson Index:", rows);
       res.json(rows[0]);

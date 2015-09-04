@@ -32,7 +32,7 @@ var tutorManager = function(req, res) {
       if(typeof params === "undefined") {
         p = [];
       } else {
-        q = q + "WHERE tutor.id=$1";
+        q = q + "WHERE tutor.id=$1 OR lessons.student=$1";
         p = [params.id];
       }
       console.log(q, p);
