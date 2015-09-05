@@ -12,11 +12,12 @@ router.get('/', function(req, res, next) {
   //res.ensureAuthenticated();
 
   console.log("lessons index", req.user);
-  if(!req.isAuthenticated()) {
+  if(!req.isAuthenticated())
+  {
     res.sendStatus(401);
   } else {
 
-    res.tutorManager.lesson.get({id: req.user.id})
+    res.tutorManager.lesson.get({userid: req.user.id})
     .then(function(rows, results) {
       console.log("Lesson Index:", rows);
       res.json(rows[0]);
@@ -63,58 +64,32 @@ router.get('/:id', function(req, res, next) {
     res.sendStatus(401);
   } else {
 
-  //console.log(req.params.id);
-  var qstring = 'select ' +
-    'lessons.id, ' +
-    'lessons.lesson_date, ' +
-    'lessons.lesson_date_end, ' +
-    'tutor.name as tutor_name, ' +
-    'student.name as student_name, ' +
-    'payments.id as payment_id, ' +
-    'payments.amount, ' +
-    'payments.status ' +
-    'from lessons ' +
-    'join users as tutor ' +
-    'on lessons.tutor = tutor.id ' +
-    'join users as student ' +
-    'on lessons.student = student.id ' +
-    'left join payments as payments ' +
-    'on lessons.id = payments.lessonid ' +
-    'where lessons.id = $1::integer;'
-  ;
-  console.log(qstring);
-
-  res.query(
-    qstring,
-    [req.params.id],
-    function(err, rows, results) {
-      if(err) {
-        console.log("error:", err);
-        res.render('error-db', { message: 'DB Error' });
-      }
-      var payments = [];
-      for (var i = 0; i < rows.length; i++) {
-        payments.push({
-          id: rows[i].payment_id,
-          amount: rows[i].amount,
-          status: rows[i].status,
-        });
-      }
-      var duration_seconds = (rows[0].lesson_date_end - rows[0].lesson_date);
-
-      var lesson = {
-        id: rows[0].id,
-        lesson_date: rows[0].lesson_date,
-        lesson_date_end: rows[0].lesson_date_end,
-        duration: duration_seconds,
-        tutor_name: rows[0].tutor_name,
-        student_name: rows[0].student_name,
-        payments: payments
-      };
-
-      console.log("row:", rows, results);
-      res.json(lesson);
+  res.tutorManager.lesson.get({lessonid:req.params.id})
+  .then(function(data) {
+    var rows = data[0];
+    var payments = [];
+    for (var i = 0; i < rows.length; i++) {
+      payments.push({
+        id: rows[i].payment_id,
+        amount: rows[i].amount,
+        status: rows[i].status,
+      });
     }
+    var duration_seconds = ((rows[0].lesson_date_end - rows[0].lesson_date) / 1000);
+
+    var lesson = {
+      id: rows[0].id,
+      lesson_date: rows[0].lesson_date,
+      lesson_date_end: rows[0].lesson_date_end,
+      duration: duration_seconds,
+      tutor_name: rows[0].tutor_name,
+      student_name: rows[0].student_name,
+      payments: payments
+    };
+
+    console.log("row:", rows);
+    res.json(lesson);
+  }
   );
 }});
 

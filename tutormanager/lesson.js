@@ -1,5 +1,5 @@
 var tutorManager = function(req, res) {
-  return lesson = {
+  return {
     create: function(params){
       console.log("creating lesson", params);
       var promise = res.query(
@@ -32,8 +32,25 @@ var tutorManager = function(req, res) {
       if(typeof params === "undefined") {
         p = [];
       } else {
-        q = q + "WHERE tutor.id=$1 OR lessons.student=$1";
-        p = [params.id];
+        if(typeof params.userid !== "undefined") {
+          q = 'select ' +
+            'lessons.id, ' +
+            'lessons.lesson_date, ' +
+            'lessons.lesson_date_end, ' +
+            'tutor.name as tutor_name, ' +
+            'student.name as student_name ' +
+            'from lessons ' +
+            'join users as tutor ' +
+            'on lessons.tutor = tutor.id ' +
+            'join users as student ' +
+            'on lessons.student = student.id ' +
+            'WHERE tutor.id=$1 OR lessons.student=$1::integer';
+          p = [params.userid];
+        } else if(typeof params.lessonid !== "undefined") {
+          q = q + "WHERE lessons.id=$1::integer";
+          p = [params.lessonid];
+        }
+
       }
       console.log(q, p);
       var promise = res.query(q,p);
