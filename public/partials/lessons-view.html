@@ -15,6 +15,10 @@
       <td>
         Duration
       </td>
+      <td>
+        Status
+      </td>
+
     </tr>
   </thead>
   <tbody>
@@ -27,6 +31,9 @@
       </td>
       <td>
         {{lesson.duration}}
+      </td>
+      <td>
+        {{lesson.lesson_status}} <button ng-click="cancel()" class="button" ng-show="canCancel">Cancel</button>
       </td>
     </tr>
   </tbody>

@@ -25,7 +25,8 @@ CREATE TABLE lessons (
   lesson_date timestamptz NOT NULL,
   lesson_date_end timestamptz NOT NULL,
   tutor integer NOT NULL,
-  student integer NOT NULL
+  student integer NOT NULL,
+  status varchar(16) NOT NULL
 );
 
 CREATE TABLE transactions (
@@ -53,13 +54,13 @@ INSERT INTO users (email, name, password, salt, status) VALUES ('teacher@localho
   'active'
 );
 
-INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ('1999-01-01 19:00:00', '1999-01-01 20:30:00', 3, 1);
-INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ('2015-07-01 20:00:00', '2015-07-01 20:30:00', 3, 1);
-INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ('2015-02-01 20:00:00', '2015-02-01 21:00:00', 3, 2);
+INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student, status) VALUES ('1999-01-01 19:00:00', '1999-01-01 20:30:00', 3, 1, 'confirmed');
+INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student, status) VALUES ('2015-07-01 20:00:00', '2015-07-01 20:30:00', 3, 1, 'confirmed');
+INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student, status) VALUES ('2015-02-01 20:00:00', '2015-02-01 21:00:00', 3, 2, 'canceled');
 
 INSERT INTO payments (description, amount, userid, lessonid, status)
   VALUES ('test payment', 20, 1, 1, 'paid');
 INSERT INTO payments (description, amount, userid, lessonid, status)
   VALUES ('test payment 2', 10, 1, 2, 'unpaid');
 INSERT INTO payments (description, amount, userid, lessonid, status)
-  VALUES ('test payment 3', 30, 2, 3, 'unpaid');
+  VALUES ('test payment 3', 30, 2, 3, 'canceled');

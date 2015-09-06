@@ -105,9 +105,16 @@ TMCtrl.controller(
     '$scope', '$routeParams', '$location', 'TMLessons',
     function($scope, $routeParams, $location, TMLessons) {
       var p = TMLessons.get({id: $routeParams.id}, function(){
-        console.log("get got:", p);
         $scope.lesson = p;
+        $scope.canCancel = ($scope.lesson.lesson_status !== 'canceled') ? true : false;
       });
+      $scope.cancel = function(){
+        $scope.lesson.operation = "cancel";
+        $scope.lesson.$update();
+        var p = TMLessons.get({id: $routeParams.id}, function(){
+          $scope.lesson = p;
+        });
+      };
     }
   ]
 );

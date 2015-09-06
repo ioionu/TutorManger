@@ -16,6 +16,16 @@ var tutorManager = function(req, res) {
         [params.id]
       );
       return promise;
+    },
+    cancel: function(params){
+      var lessonid = params.lessonid;
+
+      var q = " update payments" +
+      " set status='canceled'" +
+      " where lessonid=$1::integer RETURNING id,status;";
+      var p = [lessonid]; //TODO: confirm user id???
+      return res.query(q,p);
+
     }
   };
   return payment;

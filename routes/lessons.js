@@ -30,33 +30,79 @@ router.post('/', function(req, res, next) {
     res.sendStatus(401);
   } else {
 
+  // what are we actually doing? for now just create
+  var operation = 'create';
 
-  var lessone_id = 0;
+  var params = {};
+
+  switch(opeation) {
+    case 'create':
+      var lessone_id = 0;
+      params = {
+        lesson_date: req.body.lesson_date,
+        lesson_date_end: req.body.lesson_date_end,
+        tutor: req.user.id,
+        student: req.body.student
+      };
+      res.rec.lesson.create(params)
+      .then(function(data){
+        //TODO: errror handle
+
+        lessone_id = data[0][0].id;
+        var params = {
+          description: "i am description",
+          userid: req.body.student,
+          lessonid: lessone_id,
+          amount: parseFloat(req.body.amount).toFixed(2)
+        };
+
+        //only create payment if amount is not 0
+        //TODO: better validation
+        if(params.amount > 0) {
+          return res.tutorManager.payment.create(params);
+        }
+      })
+      .then(function(data){
+        console.log("post payment creation", data);
+        res.json({id: lessone_id});
+      });
+      break; // end create
+    case 'somthing':
+      res.json({error:"not implemented"});
+      break;
+  } // end switch
+}});
+
+//update lesson
+router.put('/:id', function(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.sendStatus(401);
+  } else {
+
+  operation = 'save';
+  var operation = (req.body.operation == 'cancel') ? 'cancel' : operation;
+
+  var lessonid = req.params.id;
+  var userid = req.user.id;
   var params = {
-    lesson_date: req.body.lesson_date,
-    lesson_date_end: req.body.lesson_date_end,
-    tutor: req.user.id,
-    student: req.body.student
+    lessonid: lessonid,
+    userid: userid
   };
-  res.rec.lesson.create(params)
-  .then(function(rows, results){
-    //TODO: errror handle
-    lessone_id = rows[0][0].id; //TODO: WTF? why [0][0]?
-    var params = {
-      description: "i am description",
-      userid: req.body.student,
-      lessonid: lessone_id,
-      amount: req.body.amount
-    };
-    return res.rec.payment.create(params);
+  res.tutorManager.lesson.cancel(params)
+  .then(function(data){
+    params = {lessonid: lessonid};
+    return res.tutorManager.payment.cancel(params);
   })
   .then(function(data){
-    console.log("post payment creation", data);
-    res.json({id: lessone_id});
-    //next();
+    var lesson = data[0][0];
+    // return lesson and status, reload lesson can be init on client side
+    return res.json({
+      lessonid: lessonid,
+      status: 'canceled'
+    });
   });
-
-}});
+  }
+});
 
 /* GET lessons instance */
 router.get('/:id', function(req, res, next) {
@@ -84,6 +130,7 @@ router.get('/:id', function(req, res, next) {
       duration: duration_seconds,
       tutor_name: rows[0].tutor_name,
       student_name: rows[0].student_name,
+      lesson_status: rows[0].lesson_status,
       payments: payments
     };
 

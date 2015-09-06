@@ -3,8 +3,8 @@ var tutorManager = function(req, res) {
     create: function(params){
       console.log("creating lesson", params);
       var promise = res.query(
-        'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4) RETURNING id',
-        [params.lesson_date, params.lesson_date_end, params.tutor, params.student]
+        'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+        [params.lesson_date, params.lesson_date_end, params.tutor, params.student, 'confirmed']
       );
       return promise;
     },
@@ -13,6 +13,7 @@ var tutorManager = function(req, res) {
         'lessons.id, ' +
         'lessons.lesson_date, ' +
         'lessons.lesson_date_end, ' +
+        'lessons.status as lesson_status, ' +
         'tutor.name as tutor_name, ' +
         'student.name as student_name, ' +
         'payments.id as payment_id, ' +
@@ -32,11 +33,14 @@ var tutorManager = function(req, res) {
       if(typeof params === "undefined") {
         p = [];
       } else {
+
+        // get single lesson
         if(typeof params.userid !== "undefined") {
           q = 'select ' +
             'lessons.id, ' +
             'lessons.lesson_date, ' +
             'lessons.lesson_date_end, ' +
+            'lessons.status, ' +
             'tutor.name as tutor_name, ' +
             'student.name as student_name ' +
             'from lessons ' +
@@ -55,6 +59,16 @@ var tutorManager = function(req, res) {
       console.log(q, p);
       var promise = res.query(q,p);
       return promise;
+    },
+    cancel: function(params) {
+      var lessonid = params.lessonid;
+      var userid = params.userid;
+
+      var q = "update lessons set status='canceled'" +
+      " where id=$1::integer" +
+      " AND tutor=$2::integer RETURNING id,status;";
+      var p = [lessonid, userid];
+      return res.query(q,p);
     }
   };
 };

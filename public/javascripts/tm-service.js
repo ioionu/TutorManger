@@ -25,7 +25,7 @@ TMAppService.factory('TMUser',
       },
       save: {
         method: 'POST',
-      },
+      }
     });
   }
 );
@@ -108,6 +108,10 @@ TMAppService.factory('TMLessons',
       },
       save: {
         method: 'POST',
+      },
+      update: {
+        method: 'PUT',
+        params:{id:'@id'},
       }
     });
   }
