@@ -15,6 +15,7 @@ CREATE TABLE users (
   email varchar(128) NOT NULL UNIQUE,
   name varchar(128) NOT NULL,
   password varchar(1024) NOT NULL,
+  type varchar(16) NOT NULL,
   salt varchar(256) NOT NULL,
   status varchar(16) NOT NULL,
   confirm varchar(256)
@@ -38,17 +39,17 @@ CREATE TABLE transactions (
 );
 
 -- password = password
-INSERT INTO users (email, name, password, salt, status) VALUES ('student@localhost', 'Test Student',
+INSERT INTO users (email, name, type, password, salt, status) VALUES ('student@localhost', 'Test Student', 'student',
   'xeR41ZKIyEGqUw22hFxMjZYok6ABzk4RpJY4c6qYE0r3rZjBtFjOP9dMo1vro82nuNEDjWqHBxuRj4N0BfP+dyj/5/CXb8Nd2C/A5eRs6c4mp4iyx9GD+lv42WB+7NcdAbTxGa8RtXgqLrTfD97OoJI8ABKpcXPOeUab0Jzi2J9jYCF5lnVuj7QsM1SmxYQfgseYSCCKzsv+DtSC0lVY2Ry6bCPXsZhSyeK5BZ060CHw3v7r62XT8mkNQ2i/M+TEFCJcYeGzOTKEjnAmr7lNfm069TpiLPwTUT5R5DGrnLH661vpD/Rma+qpdKpH+SAf1uIxF3GBnV6gFXElGfSNG1abYoud5xK36bdei+zHfMZ10Ncz9nYn6hzoTE03YgXpVtmmaAa7eg8YMTKHRxo43ONwJ5xPQkLNpWgwmLCGM0NrNDJeTvMNJstYPMiLUR5RFpgGhm/zphepxmoTOE6AH5kUu66rzNCFimUtY4vCL44jnSfkqDkm0MprUW2Q4Euhx3BzmXZkFEkm3ruhdxAy2qy/rENnb9b5BOrcVKn8nL+XCvbmyZJkTQynhdRcRA7zm6RVf0NRI9UDci08LlSLmFSKhi3qhSgCLJ4HDUSCApjpvLj60Pkdg5KfruvDEWwCzWD2a+r3hDVoGsbhwdP7AsqTur4a0vYItpjwDBFGnlA=',
   'salt',
   'active'
 );
-INSERT INTO users (email, name, password, salt, status) VALUES ('student2@localhost', 'Test2 Student2',
+INSERT INTO users (email, name, type, password, salt, status) VALUES ('student2@localhost', 'Test2 Student2', 'student',
   'xeR41ZKIyEGqUw22hFxMjZYok6ABzk4RpJY4c6qYE0r3rZjBtFjOP9dMo1vro82nuNEDjWqHBxuRj4N0BfP+dyj/5/CXb8Nd2C/A5eRs6c4mp4iyx9GD+lv42WB+7NcdAbTxGa8RtXgqLrTfD97OoJI8ABKpcXPOeUab0Jzi2J9jYCF5lnVuj7QsM1SmxYQfgseYSCCKzsv+DtSC0lVY2Ry6bCPXsZhSyeK5BZ060CHw3v7r62XT8mkNQ2i/M+TEFCJcYeGzOTKEjnAmr7lNfm069TpiLPwTUT5R5DGrnLH661vpD/Rma+qpdKpH+SAf1uIxF3GBnV6gFXElGfSNG1abYoud5xK36bdei+zHfMZ10Ncz9nYn6hzoTE03YgXpVtmmaAa7eg8YMTKHRxo43ONwJ5xPQkLNpWgwmLCGM0NrNDJeTvMNJstYPMiLUR5RFpgGhm/zphepxmoTOE6AH5kUu66rzNCFimUtY4vCL44jnSfkqDkm0MprUW2Q4Euhx3BzmXZkFEkm3ruhdxAy2qy/rENnb9b5BOrcVKn8nL+XCvbmyZJkTQynhdRcRA7zm6RVf0NRI9UDci08LlSLmFSKhi3qhSgCLJ4HDUSCApjpvLj60Pkdg5KfruvDEWwCzWD2a+r3hDVoGsbhwdP7AsqTur4a0vYItpjwDBFGnlA=',
   'salt',
   'active'
 );
-INSERT INTO users (email, name, password, salt, status) VALUES ('teacher@localhost', 'Test Teacher',
+INSERT INTO users (email, name, type, password, salt, status) VALUES ('teacher@localhost', 'Test Teacher', 'tutor',
   'xeR41ZKIyEGqUw22hFxMjZYok6ABzk4RpJY4c6qYE0r3rZjBtFjOP9dMo1vro82nuNEDjWqHBxuRj4N0BfP+dyj/5/CXb8Nd2C/A5eRs6c4mp4iyx9GD+lv42WB+7NcdAbTxGa8RtXgqLrTfD97OoJI8ABKpcXPOeUab0Jzi2J9jYCF5lnVuj7QsM1SmxYQfgseYSCCKzsv+DtSC0lVY2Ry6bCPXsZhSyeK5BZ060CHw3v7r62XT8mkNQ2i/M+TEFCJcYeGzOTKEjnAmr7lNfm069TpiLPwTUT5R5DGrnLH661vpD/Rma+qpdKpH+SAf1uIxF3GBnV6gFXElGfSNG1abYoud5xK36bdei+zHfMZ10Ncz9nYn6hzoTE03YgXpVtmmaAa7eg8YMTKHRxo43ONwJ5xPQkLNpWgwmLCGM0NrNDJeTvMNJstYPMiLUR5RFpgGhm/zphepxmoTOE6AH5kUu66rzNCFimUtY4vCL44jnSfkqDkm0MprUW2Q4Euhx3BzmXZkFEkm3ruhdxAy2qy/rENnb9b5BOrcVKn8nL+XCvbmyZJkTQynhdRcRA7zm6RVf0NRI9UDci08LlSLmFSKhi3qhSgCLJ4HDUSCApjpvLj60Pkdg5KfruvDEWwCzWD2a+r3hDVoGsbhwdP7AsqTur4a0vYItpjwDBFGnlA=',
   'salt',
   'active'

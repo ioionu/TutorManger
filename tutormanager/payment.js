@@ -20,9 +20,9 @@ var tutorManager = function(req, res) {
     cancel: function(params){
       var lessonid = params.lessonid;
 
-      var q = " update payments" +
-      " set status='canceled'" +
-      " where lessonid=$1::integer RETURNING id,status;";
+      var q = " UPDATE payments" +
+      " SET status='canceled'" +
+      " WHERE lessonid=$1::integer RETURNING id,status;";
       var p = [lessonid]; //TODO: confirm user id???
       return res.query(q,p);
 

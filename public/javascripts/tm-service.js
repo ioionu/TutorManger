@@ -61,6 +61,7 @@ TMAppService.factory('TMUserService',
           //TMUserService.user = data;
           localStorageService.set('isLoggedIn', 'true');
           localStorageService.set('username', data.name);
+          localStorageService.set('type', data.type);
           localStorageService.set('token', data.token); //TODO: token based auth
 
           $location.path("/");
@@ -73,6 +74,7 @@ TMAppService.factory('TMUserService',
         console.log("hello logout");
         localStorageService.set('isLoggedIn', 'false');
         localStorageService.set('username', 'Anon');
+        localStorageService.remove('type');
         $location.path("/");
       },
       //isLogged: false,
@@ -92,6 +94,18 @@ TMAppService.factory('TMUserService',
         } else {
           return "Anon";
         }
+      },
+      getUserType: function() {
+        return localStorageService.get('type');
+      },
+      isTutor: function() {
+        var type = this.getUserType();
+        if(typeof type !== 'undefined') {
+          if(type === 'tutor') {
+            return true;
+          }
+        }
+        return false;
       }
     };
   }

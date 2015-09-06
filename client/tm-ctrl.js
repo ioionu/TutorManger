@@ -1,4 +1,3 @@
-console.log("hello feom controllers");
 var TMCtrl = angular.module('TMCtrl', []);
 
 TMCtrl.controller(
@@ -19,11 +18,7 @@ TMCtrl.controller(
     '$scope', 'TMPayment',
     function($scope, TMPayment){
       //TODO: TMApp
-      console.log("dis bbe da index");
       $scope.payments = TMPayment.query();
-      $scope.yo = function(TMPayment){
-        console.log(TMPayment);
-      };
     }
   ]
 );
@@ -89,11 +84,11 @@ TMCtrl.controller(
 TMCtrl.controller(
   'TMCtrlLessonsIndex',
   [
-    '$scope', 'TMLessons',
-    function($scope, TMLessons){
+    '$scope', 'TMLessons', 'TMUserService',
+    function($scope, TMLessons, TMUserService){
       $scope.lessons = TMLessons.query();
       $scope.title = "lesson index!!";
-      console.log($scope);
+      $scope.isTutor = TMUserService.isTutor();
     }
   ]
 );
