@@ -43,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(db);
 
 //record middleware
+//TODO: deprecated
 var record = require('./tutormanager/record');
 app.use(record);
 
