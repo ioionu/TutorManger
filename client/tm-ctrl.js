@@ -97,18 +97,18 @@ TMCtrl.controller(
 TMCtrl.controller(
   'TMCtrlLessonsView',
   [
-    '$scope', '$routeParams', '$location', 'TMLessons',
-    function($scope, $routeParams, $location, TMLessons) {
+    '$scope', '$routeParams', '$location', '$route', 'TMLessons',
+    function($scope, $routeParams, $location, $route, TMLessons) {
       var p = TMLessons.get({id: $routeParams.id}, function(){
         $scope.lesson = p;
         $scope.canCancel = ($scope.lesson.lesson_status !== 'canceled') ? true : false;
       });
       $scope.cancel = function(){
-        $scope.lesson.operation = "cancel";
-        $scope.lesson.$update();
-        var p = TMLessons.get({id: $routeParams.id}, function(){
-          $scope.lesson = p;
-        });
+        if(confirm("Do you really want to cancel this lesson?")) {
+          $scope.lesson.operation = "cancel";
+          $scope.lesson.$update();
+          $route.reload();
+        }
       };
     }
   ]

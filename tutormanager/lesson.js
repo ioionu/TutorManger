@@ -64,9 +64,9 @@ var tutorManager = function(req, res) {
       var lessonid = params.lessonid;
       var userid = params.userid;
 
-      var q = "update lessons set status='canceled'" +
-      " where id=$1::integer" +
-      " AND tutor=$2::integer RETURNING id,status;";
+      var q = "UPDATE lessons SET status='canceled'" +
+      " WHERE id=$1::integer" +
+      " AND (tutor=$2::integer OR student=$2::integer) RETURNING id,status;";
       var p = [lessonid, userid];
       return res.query(q,p);
     }
