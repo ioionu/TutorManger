@@ -6,7 +6,8 @@ gulp.task('copy', function(){
     'bower_components/angular/angular.js',
     'bower_components/modernizr/modernizr.js',
     'bower_components/jquery/dist/jquery.js',
-    'bower_components/jquery/dist/jquery.js',
+    'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-sliderAccess.js',
+    'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.js',
     'bower_components/stripe-angular/stripe-angular.js',
     'bower_components/foundation/js/foundation.js',
     'bower_components/foundation/js/foundation/foundation.alert.js',
@@ -32,9 +33,7 @@ gulp.task('copy-css', function(){
     'bower_components/foundation/css/normalize.css.map',
     'bower_components/foundation/css/foundation.css',
     'bower_components/foundation/css/foundation.css.map',
-    'bower_components/pickadate/lib/themes/default.css',
-    'bower_components/pickadate/lib/themes/default.date.css',
-    'bower_components/pickadate/lib/themes/default.time.css'
+    'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.css'
   ])
   .pipe(
     gulp.dest('public/stylesheets/')

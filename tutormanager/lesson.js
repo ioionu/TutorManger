@@ -3,7 +3,9 @@ var tutorManager = function(req, res) {
     create: function(params){
       console.log("creating lesson", params);
       var promise = res.query(
-        'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+        'INSERT INTO lessons (lesson_date, lesson_date_end, tutor, student, status)' +
+        ' VALUES ($1, $2, $3, $4, $5)' +
+        ' RETURNING id',
         [params.lesson_date, params.lesson_date_end, params.tutor, params.student, 'confirmed']
       );
       return promise;

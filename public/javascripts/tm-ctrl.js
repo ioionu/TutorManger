@@ -122,10 +122,8 @@ TMCtrl.controller(
     '$scope', '$location', 'TMLessons', 'TMUser', 'TMUserService',
     function($scope, $location, TMLessons, TMUser, TMUserService){
 
-      $scope.inputDate = new Date();
-      $scope.inputDateEnd = new Date();
-      $scope.inputDateTime = new Date();
-      $scope.inputDateTimeEnd = new Date();
+      $scope.inputDate = "";
+      $scope.inputDateEnd = "";
 
       // TODO: filter to relevant users
       var users = TMUser.query();
@@ -136,21 +134,17 @@ TMCtrl.controller(
       $scope.username = TMUserService.getUserName();
       $scope.TMLesson.amount = 0;
 
+      $.datepicker.formatDate('W3C');
+      $('#inputDateEnd, #inputDate').datetimepicker({
+        dateFormat: "yy-mm-dd",
+        timeFormat: 'HH:mm Z',
+        addSliderAccess: true,
+        sliderAccessArgs: { touchonly: false }
+      });
 
       $scope.saveLesson = function(){
-        //inputDateEnd.$error = {fuck: true};
-        console.log("Err", $scope.inputDateTimeEnd.$error, $scope.inputDateTimeEnd.$valid);
-        // add user time to date
-        $scope.inputDate.setHours( $scope.inputDateTime.getHours() );
-        $scope.inputDate.setMinutes( $scope.inputDateTime.getMinutes() );
-        $scope.inputDate.setSeconds( $scope.inputDateTime.getSeconds() );
-        $scope.TMLesson.lesson_date = $scope.inputDate;
-
-        // add user time to date end
-        $scope.inputDateEnd.setHours( $scope.inputDateTimeEnd.getHours() );
-        $scope.inputDateEnd.setMinutes( $scope.inputDateTimeEnd.getMinutes() );
-        $scope.inputDateEnd.setSeconds( $scope.inputDateTimeEnd.getSeconds() );
-        $scope.TMLesson.lesson_date_end = $scope.inputDateEnd;
+        $scope.TMLesson.lesson_date = $("#inputDate").datepicker("getDate");
+        $scope.TMLesson.lesson_date_end = $("#inputDateEnd").datepicker("getDate");
 
         // check nd date follows start date
         if($scope.TMLesson.lesson_date_end < $scope.TMLesson.lesson_date) {

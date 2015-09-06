@@ -10,18 +10,12 @@
     </div>
     <div>
       <label for="inputDate">Start Date:</label>
-      <input type="date" ng-model="inputDate" name="inputDate" id="inputDate" required />
-    </div>
-    <div>
-      <label for="inputDateTime">Start Time:</label>
-      <span><input type="time" ng-model="inputDateTime" id="inputDateTime" required /></span>
+      <input type="text" ng-model="inputDate" name="inputDate" id="inputDate" required />
     </div>
 
     <div>
       <label for="inputDateEnd">End Date:</label>
-      <span><input type="date" ng-model="inputDateEnd" name="inputDateEnd" id="inputDateEnd" required /></span>
-      <label for="inputDateTimeEnd">End Time:</label>
-      <input type="time" ng-model="inputDateTimeEnd" name="inputDateTimeEnd" id="inputDateTimeEnd" required />
+      <span><input type="datetime-local" ng-model="inputDateEnd" name="inputDateEnd" id="inputDateEnd" required /></span>
     </div>
     <div ng-messages="lessonForm.inputDateEnd.$error" role="alert">
       <div ng-message="required">You did not enter a field</div>
@@ -29,7 +23,7 @@
       <div ng-message="maxlength">Your field is too long</div>
     </div>
     <div>
-      <label for="lessonCost">Cost</label>
+      <label for="lessonCost">Amount</label>
       <span><input type="text" ng-model="TMLesson.amount" id="lessonCost" name="lessonCost" required /></span>
     </div>
 

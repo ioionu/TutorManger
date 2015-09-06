@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
 
   var params = {};
 
-  switch(opeation) {
+  switch(operation) {
     case 'create':
       var lessone_id = 0;
       params = {
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
         tutor: req.user.id,
         student: req.body.student
       };
-      res.rec.lesson.create(params)
+      res.tutorManager.lesson.create(params)
       .then(function(data){
         //TODO: errror handle
 
