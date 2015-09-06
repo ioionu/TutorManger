@@ -24,13 +24,13 @@
   <tbody>
     <tr>
       <td>
-        {{lesson.lesson_date}}
+        {{lesson.lesson_date | date : 'EEE, d MMM, y - h:mm a'}}
       </td>
       <td>
-        {{lesson.lesson_date_end}}
+        {{lesson.lesson_date_end | date : 'EEE, d MMM, y - h:mm a'}}
       </td>
       <td>
-        {{lesson.duration}}
+        {{duration}}
       </td>
       <td>
         {{lesson.lesson_status}} <button ng-click="cancel()" class="button" ng-show="canCancel">Cancel</button>

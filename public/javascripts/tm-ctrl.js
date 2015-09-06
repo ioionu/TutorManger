@@ -101,6 +101,7 @@ TMCtrl.controller(
     function($scope, $routeParams, $location, $route, TMLessons) {
       var p = TMLessons.get({id: $routeParams.id}, function(){
         $scope.lesson = p;
+        $scope.duration = (parseInt($scope.lesson.duration) / 60) + " min";
         $scope.canCancel = ($scope.lesson.lesson_status !== 'canceled') ? true : false;
       });
       $scope.cancel = function(){

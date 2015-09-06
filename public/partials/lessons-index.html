@@ -16,7 +16,7 @@
   <tbody ng-repeat="lesson in lessons">
     <tr>
       <td><a href="/lessons/{{lesson.id}}/view">{{lesson.id}}</a></td>
-      <td>{{lesson.lesson_date}}</td>
+      <td>{{lesson.lesson_date | date : 'EEE, d MMM, y - h:mm a'}}</td>
       <td>{{lesson.tutor_name}}</td>
       <td>{{lesson.student_name}}</td>
       <td>{{lesson.status}}</td>
