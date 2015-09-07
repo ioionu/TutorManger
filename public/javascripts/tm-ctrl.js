@@ -151,12 +151,14 @@ TMCtrl.controller(
           alert("Temporal anomaly detected");
         } else {
           $scope.TMLesson.$save().then(function(){
-            console.log("after save");
             $location.path('/lessons/' + $scope.TMLesson.id + '/view');
           });
         }
 
-        console.log("saveLessonDate: ", $scope.TMLesson.lesson_date.toLocaleString(), $scope.TMLesson.lesson_date_end.toLocaleString());
+      };
+      $scope.help = function(){
+        alert("doc", document);
+        $(document).foundation('joyride', 'start');
       };
     }
   ]
@@ -181,6 +183,10 @@ TMCtrl.controller(
           alert(error.data);
         });
       };
+      $scope.help = function(){
+        $(document).foundation('joyride', 'start');
+      };
+
     }
   ]
 );

@@ -11,6 +11,7 @@ gulp.task('copy', function(){
     'bower_components/stripe-angular/stripe-angular.js',
     'bower_components/foundation/js/foundation.js',
     'bower_components/foundation/js/foundation/foundation.alert.js',
+    'bower_components/foundation/js/foundation/foundation.joyride.js',
     'node_modules/angular-resource/angular-resource.js',
     'node_modules/angular-route/angular-route.js',
     'node_modules/angular-messages/angular-messages.js',

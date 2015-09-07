@@ -61,3 +61,6 @@ a {
 .top-bar {
         max-width: 1024px;
         margin: auto; } }
+
+.help {
+  text-align: right; }

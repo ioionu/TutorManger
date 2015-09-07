@@ -1,9 +1,47 @@
-<div>
+<div class="small-12 columns">
+  <div class="help">
+    <button ng-click="help()">Help</button>
+  </div>
+
   <form ng-submit="saveUser()">
-    Username: <input type="text" name="name" ng-model="TMUser.name"/><br/>
-    Email: <input type="email" name="email" ng-model="TMUser.email"/><br/>
-    Tutor: <input type="checkbox" name="tutor" ng-model="TMUser.type"/><br/>
-    password: <input type="text" name="password" ng-model="TMUser.password"/> Repeat: <input type="text" name="password" /><br/>
-    <input type="submit" name="submit" value="Save" class='button'/>
+    <div>
+      <label for="name">Username:</label> <input type="text" name="name" id="name" ng-model="TMUser.name"/>
+    </div>
+    <div>
+      <label for="email">Email:</label> <input type="email" name="email" id="email" ng-model="TMUser.email"/>
+    </div>
+    <div>
+      <label for="tutor">Tutor: <input type="checkbox" name="tutor" id="tutor" ng-model="TMUser.type"/></label>
+    </div>
+    <div>
+      <lable for="password">Password:</lable> <input type="password" name="password" id="password" ng-model="TMUser.password"/>
+    </div>
+    <div>
+      <label for="repeat">Repeat Password:</label> <input type="password" id="repeat" name="repeat" />
+    </div>
+    <div>
+      <input type="submit" name="submit" value="Save" id="submit" class='button'/>
+    </div>
   </form>
 </div>
+<ol class="joyride-list" data-joyride>
+  <li data-id="name" data-text="Next" data-options="tip_location: bottom right; prev_button: false">
+    <p>You are just a few steps a way from managing your classes through TutorManager. Lets start with your name!</p>
+  </li>
+  <li data-id="email" data-text="Next" data-text-prev="Prev" data-options="tip_location: bottom right;">
+    <p>We need your email address so that we can confirm your account. No SPAMMY stuff, we promise!</p>
+  </li>
+  <li data-id="tutor" data-text="Next" data-text-prev="Prev" data-options="tip_location: bottom right;">
+    <p>Are you a tutor?</p>
+  </li>
+  <li data-id="password" data-text="Next" data-text-prev="Prev" data-options="tip_location: bottom right;">
+    <p>You will need a password to accesss TutorManger, make it secure and keep it secret ;)</p>
+  </li>
+  <li data-id="repeat" data-text="Next" data-text-prev="Prev" data-options="tip_location: bottom right;">
+    <p>Just type your password again to make sure it is what you think it is!</p>
+  </li>
+  <li data-id="submit" data-text-prev="Prev" data-options="tip_location: bottom right; next_button: false">
+    <p>Click Submit and you are ready for the next step!</p>
+  </li>
+
+</ol>
