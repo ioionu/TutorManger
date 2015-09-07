@@ -6,6 +6,15 @@ config.session = {
 
 config.SALT_WORK_FACTOR = 10;
 
+config.email = {
+  configure: {
+    server: process.env.email_server,
+    username: process.env.email_username,
+    password: process.env.email_password,
+    from: process.env.email_from
+  }
+};
+
 config.paypal = {
   configure: {
     'mode': process.env.cc_mode, //sandbox or live or offline

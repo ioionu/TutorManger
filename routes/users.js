@@ -1,5 +1,5 @@
 var express = require('express');
-var config = require('../config');
+var config = require('../config.js');
 var crypto = require('crypto');
 var email = require('emailjs');
 var router = express.Router();
@@ -38,10 +38,13 @@ router.post('/', function(req, res, next) {
         var key = crypto.pbkdf2Sync(req.body.password, salt, 4096, 512, 'sha256');
         var confirm_key = makeid();
 
+        //is user a tutor?
+        var usertype = req.body.type === true ? 'tutor' : 'student';
+
         //create the user
         res.query( //TODO: should i use res.query.first?
-          "INSERT INTO users (email, name, password, salt, status, confirm) VALUES ($1, $2, $3, $4, 'inactive', $5) RETURNING id",
-          [req.body.email, req.body.name, key.toString('base64'), salt, confirm_key],
+          "INSERT INTO users (email, name, type, password, salt, status, confirm) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id",
+          [req.body.email, req.body.name, usertype, key.toString('base64'), salt, 'inactive', confirm_key],
           function(err, rows, results){
             if(err) {
               console.log("error:", err);
@@ -50,15 +53,22 @@ router.post('/', function(req, res, next) {
             console.log("row:", rows, results);
 
             // send confirmation email
-            var confirm_address = "http://localhost:5000/users/confirm/" + confirm_key; //TODO: get domain from somwhere sane
+            var confirm_address = req.headers.host + "/users/confirm/" + confirm_key; //TODO: get domain from somwhere sane
             var email_message = "Thanks for registering!\n Please click here to confirm your account:\n" +
               confirm_address;
-            var server = email.server.connect({host: "localhost"});
+            var server_conf = {
+              host: config.email.configure.server,
+              username: config.email.configure.username,
+              password: config.email.configure.password
+            };
+            var server = email.server.connect(server_conf);
             server.send({
               text: email_message,
-              from: "root@localhost", //TODO: get from address from config
+              from: config.email.configure.from, //TODO: get from address from config
               to: req.body.email,
               subject: "hello " + rows[0].id
+            }, function(err, message){
+              console.log(err || message);
             });
 
             res.json({id: rows[0].id});
