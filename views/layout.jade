@@ -35,9 +35,11 @@ html( ng-app="TMApp" lang="en" class="no-js" )
       link(rel='stylesheet', href='/jquery-ui-1.11.4.custom/jquery-ui.css')
       link(rel='stylesheet', href='/stylesheets/jquery-ui-timepicker-addon.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel='stylesheet', href='/stylesheets/homepage.css')
+
 
     base(href="/#/")
-  body
+  body(ng-class='bodyClass')
     include navigation
 
     div(class="wrapper")

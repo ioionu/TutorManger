@@ -24,7 +24,8 @@ TMApp.config([
         templateUrl: 'partials/index.html',
         controller: 'TMCtrlIndex',
         title: 'TutorManager',
-        access: { requiredLogin: false }
+        access: { requiredLogin: false },
+        bodyClass: 'homepage'
       })
       .when('/payments', {
         templateUrl: 'partials/payment-index.html',
@@ -110,6 +111,7 @@ TMApp.run([
   $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
     $rootScope.title = current.$$route.title;
+    $rootScope.bodyClass = current.$$route.bodyClass;
     $rootScope.isLogged = TMUserService.isLogged;
     console.log("boom", $rootScope.isLogged);
 

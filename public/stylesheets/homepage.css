@@ -19,3 +19,7 @@
   color: charcol;
   font-size: 2em;
   font-weight: bold; }
+
+.homepage
+h1 {
+  display: none; }

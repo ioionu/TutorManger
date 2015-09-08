@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('homepage', { title: 'Payments', content: '123', user: req.user });
+  res.render('index', { page: 'homepage'});
 });
 
 router.get(/^\/payments\/.+\/view/, function(req, res, next) {
@@ -30,7 +30,6 @@ router.get(/^\/users\/unconfirmed/, function(req, res, next) {
 router.get(/^\/users\//, function(req, res, next) {
   res.render('index', { title: 'User Index', content: '' });
 });
-
 
 router.get(/^\/login/, function(req, res, next) {
   res.render('index', { title: 'User Login', content: '' });
