@@ -1,9 +1,8 @@
-<div class="payment">
-  <div ng-if="payment.paid" class="status paid">
-    <h2>PAID</h2>
-  </div>
-  <div ng-if="!payment.paid" class="status unpaid">
-    <h2>UNPAID</h2>
+<div class="payment small-12 columns">
+  <div class="status paid">
+    <span ng-class="payment.status">
+      <h2 ng-bind="payment.status"></h2>
+    </span>
   </div>
 
   <h1>Invoice {{payment.id}}</h1>
@@ -12,7 +11,7 @@
   <p><strong>Description:</strong>: {{payment.description}}</p>
   <p><strong>Status:</strong>: {{payment.status}}</p>
 
-  <div class="transaction" ng-if="!payment.paid">
+  <div class="transaction" ng-if="payment.unpaid">
     <div class="ssl-secure">SSL Secure <img src="/images/system-lock-screen.png" alt="lock"/></div>
 
     <form class="payment-form" stripe:form="makePayment" ng-submit="checkCard()">

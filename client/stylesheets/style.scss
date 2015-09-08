@@ -24,7 +24,9 @@ a {
 }
 
 .payment {
+
   .status {
+    text-transform: uppercase;
     float: right;
   }
   .paid h2 {

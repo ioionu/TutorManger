@@ -13,6 +13,7 @@ a {
   color: #00B7FF; }
 
 .payment .status {
+  text-transform: uppercase;
   float: right; }
 
 .payment .paid h2 {
