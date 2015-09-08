@@ -19,6 +19,10 @@ TMCtrl.controller(
     function($scope, TMPayment){
       //TODO: TMApp
       $scope.payments = TMPayment.query();
+      $scope.help = function(){
+        $(document).foundation('joyride', 'start');
+      };
+
     }
   ]
 );
@@ -89,6 +93,10 @@ TMCtrl.controller(
       $scope.lessons = TMLessons.query();
       $scope.title = "lesson index!!";
       $scope.isTutor = TMUserService.isTutor();
+      $scope.help = function(){
+        $(document).foundation('joyride', 'start');
+      };
+
     }
   ]
 );

@@ -1,17 +1,30 @@
-<h1>Payments Index</h1>
-<table class='payments'>
-  <thead>
-    <tr>
-      <td>ID</td>
-      <td>Description</td>
-      <td>Amount</td>
-    </tr>
-  </thead>
-  <tbody ng-repeat="payment in payments">
-    <tr>
-      <td><a href="/payments/{{payment.id}}/view">{{payment.id}}</a></td>
-      <td>{{payment.description}}</td>
-      <td>{{payment.amount}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="small-12 columns">
+
+  <h1>Payments Index</h1>
+  <div class="help">
+    <button ng-click="help()">Help</button>
+  </div>
+  <table class='payments'>
+    <thead>
+      <tr>
+        <td id="paymentId">ID</td>
+        <td>Description</td>
+        <td>Amount</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <tbody ng-repeat="payment in payments">
+      <tr>
+        <td><a href="/payments/{{payment.id}}/view">{{payment.id}}</a></td>
+        <td><a href="/payments/{{payment.id}}/view">{{payment.description}}</a></td>
+        <td>{{payment.amount}}</td>
+        <td>{{payment.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ol class="joyride-list" data-joyride>
+  <li data-id="paymentId" data-text="Next" data-options="tip_location: top right; prev_button: false">
+    <p>Click on the Payments description to view details and make a payment with your creditcard.</p>
+  </li>
+</ol>
