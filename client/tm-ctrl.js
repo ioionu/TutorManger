@@ -72,9 +72,11 @@ TMCtrl.controller(
             jQuery('.transaction .payment-form input, .transaction .payment-form select').attr('disabled',null);
             console.log(err_message, status, response);
           }
-
-          //$http.post('/save_customer', { token: response.id });
+        }; // end make payment
+        $scope.help = function(){
+          $(document).foundation('joyride', 'start');
         };
+
       });
     }
   ]

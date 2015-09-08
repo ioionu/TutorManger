@@ -25,6 +25,12 @@ a {
 .payment-index td {
   white-space: nowrap; }
 
+.payments {
+  width: 100%; }
+
+.lessons {
+  width: 100%; }
+
 .transaction {
   width: 75%;
   margin: auto;

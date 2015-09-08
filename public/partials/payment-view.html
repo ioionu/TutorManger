@@ -11,7 +11,11 @@
   <p><strong>Description:</strong>: {{payment.description}}</p>
   <p><strong>Status:</strong>: {{payment.status}}</p>
 
-  <div class="transaction" ng-if="payment.unpaid">
+  <div class="transaction" id="paymentBlock" ng-if="payment.unpaid">
+    <div class="help">
+      <button ng-click="help()">Help</button>
+    </div>
+
     <div class="ssl-secure">SSL Secure <img src="/images/system-lock-screen.png" alt="lock"/></div>
 
     <form class="payment-form" stripe:form="makePayment" ng-submit="checkCard()">
@@ -43,3 +47,12 @@
     </form>
   </div>
 </div>
+
+<ol class="joyride-list" data-joyride>
+  <li data-id="paymentBlock" data-text="Close" data-options="tip_location: top right; prev_button: false">
+    <p>Enter your Credit Card details to make a payment</p>
+    <p>
+      Your information will be seculy processed and not retained.
+    </p>
+  </li>
+</ol>
