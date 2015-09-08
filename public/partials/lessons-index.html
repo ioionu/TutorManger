@@ -1,25 +1,36 @@
-<h1>Lessons Index</h1>
-<div ng-show="isTutor">
-  <a href="/lessons/create" class="button">Create New Lesson</a>
-</div>
+<div class="small-12 columns">
+  <h1>Lessons Index</h1>
+  <div class="help">
+    <button ng-click="help()">Help</button>
+  </div>
 
-<table class="lessons">
-  <thead>
-    <tr>
-      <td>ID</td>
-      <td>Date</td>
-      <td>Tutor</td>
-      <td>Student</td>
-      <td>Status</td>
-    </tr>
-  </thead>
-  <tbody ng-repeat="lesson in lessons">
-    <tr>
-      <td><a href="/lessons/{{lesson.id}}/view">{{lesson.id}}</a></td>
-      <td>{{lesson.lesson_date | date : 'EEE, d MMM, y - h:mm a'}}</td>
-      <td>{{lesson.tutor_name}}</td>
-      <td>{{lesson.student_name}}</td>
-      <td>{{lesson.status}}</td>
-    </tr>
-  </tbody>
-</table>
+  <div ng-show="isTutor">
+    <a href="/lessons/create" class="button">Create New Lesson</a>
+  </div>
+
+  <table class="lessons">
+    <thead>
+      <tr>
+        <td id="lessonID">ID</td>
+        <td>Date</td>
+        <td>Tutor</td>
+        <td>Student</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <tbody ng-repeat="lesson in lessons">
+      <tr>
+        <td><a href="/lessons/{{lesson.id}}/view">{{lesson.id}}</a></td>
+        <td><a href="/lessons/{{lesson.id}}/view">{{lesson.lesson_date | date : 'EEE, d MMM, y - h:mm a'}}</a></td>
+        <td>{{lesson.tutor_name}}</td>
+        <td>{{lesson.student_name}}</td>
+        <td>{{lesson.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ol class="joyride-list" data-joyride>
+  <li data-id="lessonID" data-text="Close" data-options="tip_location: top right; prev_button: false">
+    <p>Click on the Lesson date to view more details, cancel or and make a payment.</p>
+  </li>
+</ol>

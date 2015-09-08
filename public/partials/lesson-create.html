@@ -1,8 +1,12 @@
-<div>
+<div class="small-12 column">
+  <h1>Create Lesson</h1>
+  <div class="help">
+    <button ng-click="help()">Help</button>
+  </div>
 
   <form ng-submit="saveLesson()" name="lessonForm">
     <div>
-      <div id="lesson-tutor">Tutor: <span ng-bind="username"></span></div>
+      <h2 id="lesson-tutor">Tutor: <span ng-bind="username"></span></h2>
     </div>
     <div>
       <label for="lesson-student">Student:</label>
@@ -18,7 +22,6 @@
       <span><input type="datetime-local" ng-model="inputDateEnd" name="inputDateEnd" id="inputDateEnd" required /></span>
     </div>
     <div ng-messages="lessonForm.inputDateEnd.$error" role="alert">
-      <div ng-message="required">You did not enter a field</div>
       <div ng-message="minlength">Your field is too short</div>
       <div ng-message="maxlength">Your field is too long</div>
     </div>
@@ -27,6 +30,26 @@
       <span><input type="text" ng-model="TMLesson.amount" id="lessonCost" name="lessonCost" required /></span>
     </div>
 
-    <input type="submit" name="submit" value="Save" class="button"/>
+    <input type="submit" name="submit" value="Create Lesson" id="submit" class="button"/>
   </form>
 </div>
+<ol class="joyride-list" data-joyride>
+  <li data-id="lesson-tutor" data-text="Next" data-options="tip_location: bottom right; prev_button: false">
+    <p>Lessons are created for the user is currently logged in.</p>
+  </li>
+  <li data-id="lesson-student" data-text="Next" data-text-prev="Prev" data-options="tip_location: top right;">
+    <p>Select a student from the list</p>
+  </li>
+  <li data-id="inputDate" data-text="Next" data-text-prev="Prev" data-options="tip_location: top right;">
+    <p>What time will the lesson start?</p>
+  </li>
+  <li data-id="inputDateEnd" data-text="Next" data-text-prev="Prev" data-options="tip_location: top right;">
+    <p>What time will the lesson end?</p>
+  </li>
+  <li data-id="lessonCost" data-text="Next" data-text-prev="Prev" data-options="tip_location: top right;">
+    <p>How much will you charge for the lesson?</p>
+  </li>
+  <li data-id="submit" data-text-prev="Prev" data-options="tip_location: bottom right; next_button: false">
+    <p>Once you have entered all the details click Create Lesson to confirm the class.</p>
+  </li>
+</ol>
