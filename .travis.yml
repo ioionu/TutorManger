@@ -3,5 +3,6 @@ node_js:
   - "iojs-v1.6.2"
 
 before_script:
+  - npm install gulp
   - npm install -g gulp
 script: gulp travistest
