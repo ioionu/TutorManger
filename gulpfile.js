@@ -63,5 +63,15 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
+/**
+ * Run tests
+ */
+gulp.task('travistest', function (done) {
+  new Server({
+    configFile: __dirname + '/spec/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
 
 gulp.task('default', ['copy', 'copy-css', 'sass', 'test', 'watch']);
