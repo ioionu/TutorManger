@@ -50,3 +50,9 @@ In the root directory of the project run:
 ```
 karma start spec/karma.conf.js
 ```
+
+## Deploy
+
+```
+git push heroku master
+```
