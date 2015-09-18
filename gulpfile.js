@@ -1,5 +1,6 @@
-gulp = require("gulp");
-sass = require("gulp-sass");
+var gulp = require("gulp");
+var sass = require("gulp-sass");
+var Server = require('karma').Server;
 
 gulp.task('copy', function(){
   gulp.src([
@@ -52,5 +53,15 @@ gulp.task('watch', function(){
   gulp.watch(['client/stylesheets/**/*.scss'], ['sass']);
 });
 
+/**
+ * Run tests
+ */
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/spec/karma.conf.js',
+    singleRun: false
+  }, done).start();
+});
 
-gulp.task('default', ['copy', 'copy-css', 'sass', 'watch']);
+
+gulp.task('default', ['copy', 'copy-css', 'sass', 'test', 'watch']);

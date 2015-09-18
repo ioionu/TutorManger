@@ -19,7 +19,6 @@ TMCtrl.controller(
     function($scope, TMPayment){
       //TODO: TMApp
       $scope.payments = TMPayment.query();
-      console.log("test desu", $scope.payments);
       $scope.help = function(){
         $(document).foundation('joyride', 'start');
       };
