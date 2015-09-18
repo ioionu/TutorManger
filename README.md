@@ -1,5 +1,7 @@
 # TutorManger
 
+![Build Status](https://travis-ci.org/ioionu/TutorManger.svg?branch=master)
+
 CRM for Tutors.
 
 ## Dependencies
