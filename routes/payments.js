@@ -1,5 +1,4 @@
 var express = require('express');
-var paypal = require('paypal-rest-sdk');
 var passport = require('passport');
 var config = require('../config');
 var router = express.Router();

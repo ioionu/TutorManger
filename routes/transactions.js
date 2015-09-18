@@ -1,5 +1,4 @@
 var express = require('express');
-var paypal = require('paypal-rest-sdk');
 var config = require('../config');
 var stripe = require("stripe")(config.stripe.configure.secret_key);
 
