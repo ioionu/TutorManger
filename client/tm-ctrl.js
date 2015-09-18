@@ -4,8 +4,8 @@ TMCtrl.controller(
   'TMCtrlIndex',
   [
     '$scope',
-    function($scope){
-      console.log("homepage");
+    function($scope) {
+      $scope.hello = "The easiest way to manage your class!";
     }
   ]
 );

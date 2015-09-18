@@ -3,7 +3,7 @@ sass = require("gulp-sass");
 
 gulp.task('copy', function(){
   gulp.src([
-    'bower_components/angular/angular.js',
+    'node_modules/angular/angular.js',
     'bower_components/modernizr/modernizr.js',
     'bower_components/jquery/dist/jquery.js',
     'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-sliderAccess.js',
@@ -21,7 +21,7 @@ gulp.task('copy', function(){
     'client/lib.js',
     'client/tm-ctrl.js',
     'client/tm-service.js',
-    'client/tm-filters.js',
+    'client/tm-filters.js'
   ])
   .pipe(
     gulp.dest('public/javascripts/')
