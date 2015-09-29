@@ -17,7 +17,8 @@ TMApp.config([
 
   function($httpProvider, $routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
-    Stripe.setPublishableKey("pk_test_SmtJiXCEwaof3aL3xudljbMq");
+    if(typeof Stripe !== 'undefined')
+      Stripe.setPublishableKey("pk_test_SmtJiXCEwaof3aL3xudljbMq");
     $httpProvider.interceptors.push('TMAppInterceptor');
     $routeProvider.
       when('/', {
