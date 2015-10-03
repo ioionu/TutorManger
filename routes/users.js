@@ -58,8 +58,9 @@ router.post('/', function(req, res, next) {
               confirm_address;
             var server_conf = {
               host: config.email.configure.server,
-              username: config.email.configure.username,
-              password: config.email.configure.password
+              user: config.email.configure.username,
+              password: config.email.configure.password,
+              ssl: true
             };
             var server = email.server.connect(server_conf);
             server.send({
