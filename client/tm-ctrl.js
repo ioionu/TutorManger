@@ -5,7 +5,7 @@ TMCtrl.controller(
   [
     '$scope',
     function($scope) {
-      $scope.hello = "The easiest way to manage your class!";
+      $scope.hello = "The easiest way to manage your lesson!";
       $scope.help = function(){
         $(document).foundation('joyride', 'start');
       };
