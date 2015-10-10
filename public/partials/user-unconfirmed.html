@@ -1,12 +1,23 @@
-<h2>
-  Thanks for registering!
-</h2>
-<p>
-  We have just sent a confirmation email to you to confirm your account.
-</p>
-<p>
-  Check your email for a message from us and click the link confirm your account!
-</p>
-<p>
-  If message does not arrive please check your spam folder.
-</p>
+<div class="small-12 columns">
+
+  <h2>
+    Thanks for registering!
+  </h2>
+  <div class="help">
+    <button ng-click="help()">Help</button>
+  </div>
+  <p>
+    We have just sent a confirmation email to you to confirm your account.
+  </p>
+  <p>
+    Check your email for a message from us and click the link confirm your account!
+  </p>
+  <p id="registering">
+    If message does not arrive please check your spam folder.
+  </p>
+  <ol class="joyride-list" data-joyride>
+    <li data-id="registering" data-text="Next" data-options="tip_location: bottom right; prev_button: false; next_button: false">
+      <p>We have just sent you an email. In it you will find a link to activate your account. The email may take a few mins to come through.</p>
+    </li>
+  </ol>
+</div>

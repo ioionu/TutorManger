@@ -224,6 +224,10 @@ TMCtrl.controller(
           console.log("Error confirming account:" + err);
         });
       };
+      $scope.help = function(){
+        $(document).foundation('joyride', 'start');
+      };
+
     }
   ]
 );
