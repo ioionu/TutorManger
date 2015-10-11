@@ -9,7 +9,7 @@ describe("TMCtrlIndex", function() {
   it('should display the homepage', inject(function($controller) {
     var scope = {};
     var ctrl = $controller('TMCtrlIndex', {$scope:scope});
-    expect(scope.hello).toBe("The easiest way to manage your class!");
+    expect(scope.hello).toBe("The easiest way to manage your lesson!");
     console.log("ctrl", ctrl, scope);
   }));
 });

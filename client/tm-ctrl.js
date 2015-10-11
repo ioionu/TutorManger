@@ -217,13 +217,16 @@ TMCtrl.controller(
         var p = $scope.TMUserConfirm.$save();
         p.then(function(data){
           if(typeof(parseInt(data.id)) != 'undefined') {
-            $location.path('/login');
+            $location.path('/login?source=confirmed');
           }
         },
         function(err){
           console.log("Error confirming account:" + err);
         });
       };
+      jQuery(document).ready(function(){
+        $scope.confirmUser();
+      });
       $scope.help = function(){
         $(document).foundation('joyride', 'start');
       };
