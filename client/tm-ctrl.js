@@ -285,7 +285,7 @@ TMCtrl.controller(
       if (TMUserService.isLogged) {
         TMUserService.isLogged = false;
         delete $window.sessionStorage.token;
-        $location.path("/");
+        $location.path("/lessons");
       }
     };
     // show or hide the your account has been enabled message

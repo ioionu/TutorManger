@@ -52,8 +52,12 @@ router.post('/', function(req, res, next) {
             }
             console.log("row:", rows, results);
 
+            var linkPrefix = "http://";
+            if(config.force_https) {
+              linkPrefix = "https://";
+            }
             // send confirmation email
-            var confirm_address = req.headers.host + "/users/confirm/" + confirm_key; //TODO: get domain from somwhere sane
+            var confirm_address = linkPrefix + req.headers.host + "/users/confirm/" + confirm_key; //TODO: get domain from somwhere sane
             var email_message = "Thanks for registering!\n Please click here to confirm your account:\n" +
               confirm_address;
             var server_conf = {
