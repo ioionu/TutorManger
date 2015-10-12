@@ -217,7 +217,9 @@ TMCtrl.controller(
         var p = $scope.TMUserConfirm.$save();
         p.then(function(data){
           if(typeof(parseInt(data.id)) != 'undefined') {
-            $location.path('/login?source=confirmed');
+            $location.path('/login');
+            //show your account has been activated message
+            $location.search({source: 'confirmed'});
           }
         },
         function(err){
@@ -285,6 +287,15 @@ TMCtrl.controller(
         delete $window.sessionStorage.token;
         $location.path("/");
       }
+    };
+    // show or hide the your account has been enabled message
+    $scope.confirmedAccount = function(){
+      var urlParams = $location.search();
+      if(typeof urlParams.source !== 'undefined' && urlParams.source === 'confirmed') {
+        return true;
+      }
+
+      return false;
     };
     $scope.help = function(){
       $(document).foundation('joyride', 'start');

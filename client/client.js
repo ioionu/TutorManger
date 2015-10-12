@@ -72,7 +72,7 @@ TMApp.config([
       })
       .when('/users/unconfirmed', {
         templateUrl: 'partials/user-unconfirmed.html',
-        controller: 'TMCtrlUserConfirm',
+        //controller: 'TMCtrlUserConfirm',
         title: 'Check Your Email',
         access: { requiredLogin: false }
       })

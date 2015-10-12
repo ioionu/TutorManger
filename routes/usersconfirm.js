@@ -23,6 +23,7 @@ router.post('/', function(req, res, next) {
               console.log("error:", err);
               res.send(500).message("Error occured confirming user in db");
             }
+            console.log(rows);
             res.json({id: rows.id});
           }
         );
