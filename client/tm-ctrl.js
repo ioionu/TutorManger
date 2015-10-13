@@ -152,8 +152,7 @@ TMCtrl.controller(
       $('#inputDateEnd, #inputDate').datetimepicker({
         dateFormat: "yy-mm-dd",
         timeFormat: 'HH:mm Z',
-        addSliderAccess: true,
-        sliderAccessArgs: { touchonly: false }
+        controlType: 'select',
       });
 
       $scope.saveLesson = function(){
