@@ -39,7 +39,28 @@ If you are running the application for the first time you can install a demo DB
 
 ## Configure
 
-Environment configuration can be managed with the .env file
+### Development Environment
+
+Environment configuration can be managed with the .env file.
+
+A template .env file _example_.env is located in the root of the project. Simply
+rename this file and update its contents to reflect your development environment.
+
+### Heroku Production Environment
+
+Configuration on Heroku is achieved by use of environment variables. These must
+be setup and configured in the Heroku environment administration page.
+
+Configuration variable can be located under the "Settings" tab withing your
+application settings. Click on "Reveal Config Vars" then add:
+
+ * DATABASE_URL
+ * email_from
+ * email_password
+ * email_server
+ * email_username
+ * force_https
+ * stripe_secret
 
 ## Tests
 
@@ -52,6 +73,10 @@ karma start spec/karma.conf.js
 ```
 
 ## Deploy
+
+For information on deploying to Heroku please refer to the Heroku developer documentation.
+
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app
 
 ```
 git push heroku master
